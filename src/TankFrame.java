@@ -9,9 +9,11 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    private int x = 200, y = 200;
+
     public TankFrame() throws HeadlessException {
         //  设置窗口尺寸
-        setSize(800,600);
+        setSize(800, 600);
         //  设置窗口是否可扩展
         setResizable(false);
         //  设置窗口标题
@@ -29,11 +31,14 @@ public class TankFrame extends Frame {
 
     /**
      * 窗口需要重新绘制的时候，自动调用该方法
+     *
      * @param g 相当于【 画笔 】
      */
     @Override
     public void paint(Graphics g) {
-        g.fillRect(200, 200, 50, 50);
+        g.fillRect(x, y, 50, 50);
+        x += 10;
+        y += 10;
     }
 
 }
