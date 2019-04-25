@@ -1,4 +1,7 @@
-import java.awt.*;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -11,7 +14,7 @@ public class TankFrame extends Frame {
 
     private int x = 200, y = 200;
 
-    public TankFrame() throws HeadlessException {
+    public TankFrame() {
         //  设置窗口尺寸
         setSize(800, 600);
         //  设置窗口是否可扩展
@@ -20,6 +23,8 @@ public class TankFrame extends Frame {
         setTitle("TankWar");
         //  显示窗口是否可见
         setVisible(true);
+        //  设置键盘监听处理类
+        addKeyListener(new MyKeyListener());
         //  设置窗口关闭方法
         addWindowListener(new WindowAdapter() {
             @Override
@@ -30,15 +35,42 @@ public class TankFrame extends Frame {
     }
 
     /**
-     * 窗口需要重新绘制的时候，自动调用该方法
+     * 窗口需要重新绘制( 创建 | 最小化 )的时候，自动调用该方法
      *
      * @param g 相当于【 画笔 】
      */
     @Override
     public void paint(Graphics g) {
+        System.out.println("窗口重新绘制");
         g.fillRect(x, y, 50, 50);
         x += 10;
         y += 10;
+    }
+
+    /**
+     * 键盘监听处理类
+     */
+    private class MyKeyListener extends KeyAdapter {
+
+        /**
+         * 当键盘按下时调用
+         *
+         * @param e 键盘事件
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+            super.keyPressed(e);
+        }
+
+        /**
+         * 当键盘抬起的时调用
+         *
+         * @param e 键盘事件
+         */
+        @Override
+        public void keyReleased(KeyEvent e) {
+            super.keyReleased(e);
+        }
     }
 
 }

@@ -5,6 +5,6 @@
  */
 public class Main {
     public static void main(String[] args) {
-        new TankFrame();
+        TankFrame tankFrame = new TankFrame();
     }
 }
