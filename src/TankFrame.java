@@ -13,6 +13,21 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     /**
+     * 坦克的宽度
+     */
+    private static final int TANK_WIDTH = 50;
+
+    /**
+     * 坦克的高度
+     */
+    private static final int TANK_HEIGHT = 50;
+
+    /**
+     * 坦克移动的步长（ 速度 ）
+     */
+    private static final int TANK_STEP = 200;
+
+    /**
      * 坦克的 X 轴位置
      */
     private int mTankX = 200;
@@ -21,11 +36,6 @@ public class TankFrame extends Frame {
      * 坦克的 Y 轴位置
      */
     private int mTankY = 200;
-
-    /**
-     * 坦克移动的步长（ 速度 ）
-     */
-    private int mTankStep = 200;
 
     public TankFrame() {
         //  设置窗口尺寸
@@ -55,7 +65,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         System.out.println("窗口重新绘制");
-        g.fillRect(mTankX, mTankY, 50, 50);
+        g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
     }
 
     /**
@@ -64,13 +74,50 @@ public class TankFrame extends Frame {
     private class MyKeyListener extends KeyAdapter {
 
         /**
+         * 向上键是否被按压
+         */
+        private boolean mBU = false;
+
+        /**
+         * 向下键是否被按压
+         */
+        private boolean mBD = false;
+
+        /**
+         * 向左键是否被按压
+         */
+        private boolean mBL = false;
+
+        /**
+         * 向右键是否被按压
+         */
+        private boolean mBR = false;
+
+
+        /**
          * 当键盘按下时调用
          *
          * @param e 键盘事件
          */
         @Override
         public void keyPressed(KeyEvent e) {
-            mTankX += mTankStep;
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    mBU = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    mBU = true;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    mBL = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    mBR = true;
+                    break;
+                default:
+                    break;
+            }
+
             //  通知窗口进行重绘
             repaint();
         }
@@ -82,7 +129,22 @@ public class TankFrame extends Frame {
          */
         @Override
         public void keyReleased(KeyEvent e) {
-            super.keyReleased(e);
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    mBU = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    mBU = false;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    mBL = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    mBR = false;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
