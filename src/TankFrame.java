@@ -12,7 +12,20 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    private int x = 200, y = 200;
+    /**
+     * 坦克的 X 轴位置
+     */
+    private int mTankX = 200;
+
+    /**
+     * 坦克的 Y 轴位置
+     */
+    private int mTankY = 200;
+
+    /**
+     * 坦克移动的步长（ 速度 ）
+     */
+    private int mTankStep = 200;
 
     public TankFrame() {
         //  设置窗口尺寸
@@ -42,9 +55,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         System.out.println("窗口重新绘制");
-        g.fillRect(x, y, 50, 50);
-        x += 10;
-        y += 10;
+        g.fillRect(mTankX, mTankY, 50, 50);
     }
 
     /**
@@ -59,7 +70,9 @@ public class TankFrame extends Frame {
          */
         @Override
         public void keyPressed(KeyEvent e) {
-            super.keyPressed(e);
+            mTankX += mTankStep;
+            //  通知窗口进行重绘
+            repaint();
         }
 
         /**
