@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -7,6 +6,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : zhenweiLi
@@ -15,15 +16,33 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    /**
+     * 游戏区域宽度
+     */
     public static final int GAME_WIDTH = 800;
+
+    /**
+     * 游戏区域高度
+     */
     public static final int GAME_HEIGHT = 600;
 
     /**
      * 主战坦克
      */
-    private Tank mMainTank = new Tank(200, 200, Dir.DOWN);
+    private Tank mMainTank = new Tank(200, 200, Dir.DOWN, this);
 
-    private Bullet mBullet = new Bullet(50, 50, Dir.DOWN);
+    /**
+     * 子弹容器
+     */
+    private List<Bullet> mBulletList = new ArrayList<>();
+
+    public List<Bullet> getBulletList() {
+        return mBulletList;
+    }
+
+    public void setBulletList(List<Bullet> mBulletList) {
+        this.mBulletList = mBulletList;
+    }
 
     /**
      * 坦克游戏的主窗口
@@ -74,8 +93,23 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量:" + mBulletList.size(), 10, 60);
+        g.setColor(c);
+
         mMainTank.paint(g);
-        mBullet.paint(g);
+        for (int i = 0; i < mBulletList.size(); i++) {
+            mBulletList.get(i).paint(g);
+        }
+//        for (Iterator<Bullet> it = mBulletList.iterator(); it.hasNext(); ) {
+//            Bullet bullet = it.next();
+//            if (bullet.isLive()) {
+//                bullet.paint(g);
+//            } else {
+//                it.remove();
+//            }
+//        }
     }
 
     /**
@@ -148,6 +182,10 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_RIGHT:
                     mBR = false;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    //  control 键抬起时发射子弹
+                    mMainTank.fire();
                     break;
                 default:
                     break;

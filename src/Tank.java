@@ -1,4 +1,6 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.List;
 
 /**
  * @author : zhenweiLi
@@ -20,7 +22,7 @@ public class Tank {
     /**
      * 坦克移动速度
      */
-    private static final int TANK_STEP = 5;
+    private static final int TANK_SPEED = 5;
 
     /**
      * 坦克的 X 轴位置
@@ -41,6 +43,11 @@ public class Tank {
      * 坦克运动状态
      */
     private boolean moving = false;
+
+    /**
+     * 游戏窗口
+     */
+    private TankFrame mTankFrame;
 
     /**
      * 获取坦克方向
@@ -91,10 +98,11 @@ public class Tank {
      * @param tankY 初始化 Y 轴
      * @param dir   初始化的方向
      */
-    public Tank(int tankX, int tankY, Dir dir) {
+    public Tank(int tankX, int tankY, Dir dir, TankFrame tankFrame) {
         this.mTankX = tankX;
         this.mTankY = tankY;
         this.mTankDir = dir;
+        this.mTankFrame = tankFrame;
     }
 
     /**
@@ -107,6 +115,7 @@ public class Tank {
         g.setColor(Color.YELLOW);
         g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
         g.setColor(c);
+
         move();
     }
 
@@ -121,19 +130,27 @@ public class Tank {
 
         switch (mTankDir) {
             case UP:
-                mTankY -= TANK_STEP;
+                mTankY -= TANK_SPEED;
                 break;
             case DOWN:
-                mTankY += TANK_STEP;
+                mTankY += TANK_SPEED;
                 break;
             case LEFT:
-                mTankX -= TANK_STEP;
+                mTankX -= TANK_SPEED;
                 break;
             case RIGHT:
-                mTankX += TANK_STEP;
+                mTankX += TANK_SPEED;
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 发射子弹
+     */
+    public void fire() {
+        List<Bullet> bulletList = mTankFrame.getBulletList();
+        bulletList.add(new Bullet(this.mTankX, this.mTankY, this.mTankDir, this.mTankFrame));
     }
 }

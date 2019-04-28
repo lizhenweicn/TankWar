@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * @author : zhenweiLi
@@ -10,17 +11,17 @@ public class Bullet {
     /**
      * 子弹的宽度
      */
-    private static final int TANK_WIDTH = 50;
+    private static final int BULLET_WIDTH = 30;
 
     /**
      * 子弹的高度
      */
-    private static final int TANK_HEIGHT = 50;
+    private static final int BULLET_HEIGHT = 30;
 
     /**
      * 子弹移动速度
      */
-    private static final int BULLET_SPEED = 1;
+    private static final int BULLET_SPEED = 10;
 
     /**
      * 子弹的 X 轴位置
@@ -38,6 +39,16 @@ public class Bullet {
     private Dir mBulletDir;
 
     /**
+     * 子弹是否存在
+     */
+    private boolean mIsLive = true;
+
+    /**
+     * 游戏窗口
+     */
+    private TankFrame mTankFrame;
+
+    /**
      * 无参构造
      */
     public Bullet() {
@@ -50,10 +61,11 @@ public class Bullet {
      * @param bulletY   初始化 Y 轴
      * @param bulletDir 初始化的方向
      */
-    public Bullet(int bulletX, int bulletY, Dir bulletDir) {
+    public Bullet(int bulletX, int bulletY, Dir bulletDir, TankFrame tankFrame) {
         this.mBulletX = bulletX;
         this.mBulletY = bulletY;
         this.mBulletDir = bulletDir;
+        this.mTankFrame = tankFrame;
     }
 
     /**
@@ -62,12 +74,45 @@ public class Bullet {
      * @param g 画笔
      */
     public void paint(Graphics g) {
+
+        if (!mIsLive) {
+            mTankFrame.getBulletList().remove(this);
+        }
+
         Color c = g.getColor();
         g.setColor(Color.RED);
-        g.fillOval(mBulletX, mBulletY, TANK_WIDTH, TANK_HEIGHT);
+        g.fillOval(mBulletX, mBulletY, BULLET_WIDTH, BULLET_HEIGHT);
         g.setColor(c);
 
-        mBulletY += BULLET_SPEED;
+        move();
+    }
+
+    /**
+     * 子弹移动的方法
+     */
+    private void move() {
+
+        switch (mBulletDir) {
+            case LEFT:
+                mBulletX -= BULLET_SPEED;
+                break;
+            case UP:
+                mBulletY -= BULLET_SPEED;
+                break;
+            case RIGHT:
+                mBulletX += BULLET_SPEED;
+                break;
+            case DOWN:
+                mBulletY += BULLET_SPEED;
+                break;
+            default:
+                break;
+        }
+
+        if (mBulletX < 0 || mBulletY < 0 || mBulletX > TankFrame.GAME_WIDTH || mBulletY > TankFrame.GAME_HEIGHT) {
+            mIsLive = false;
+        }
+
     }
 
 }
