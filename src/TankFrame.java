@@ -13,35 +13,13 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     /**
-     * 坦克的宽度
+     * 主战坦克
      */
-    private static final int TANK_WIDTH = 50;
+    private Tank mMainTank = new Tank(200, 200, Dir.DOWN);
 
     /**
-     * 坦克的高度
+     * 坦克游戏的主窗口
      */
-    private static final int TANK_HEIGHT = 50;
-
-    /**
-     * 坦克移动的步长（ 速度 ）
-     */
-    private static final int TANK_STEP = 2;
-
-    /**
-     * 坦克的 X 轴位置
-     */
-    private int mTankX = 200;
-
-    /**
-     * 坦克的 Y 轴位置
-     */
-    private int mTankY = 200;
-
-    /**
-     * 坦克的方向
-     */
-    private Dir mDir = Dir.DOWN;
-
     public TankFrame() {
         //  设置窗口尺寸
         setSize(800, 600);
@@ -69,23 +47,7 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
-        switch (mDir) {
-            case UP:
-                mTankY -= TANK_STEP;
-                break;
-            case DOWN:
-                mTankY += TANK_STEP;
-                break;
-            case LEFT:
-                mTankX -= TANK_STEP;
-                break;
-            case RIGHT:
-                mTankX += TANK_STEP;
-                break;
-            default:
-                break;
-        }
+        mMainTank.paint(g);
     }
 
     /**
@@ -170,16 +132,16 @@ public class TankFrame extends Frame {
          */
         private void setMainTankDir() {
             if (mBU) {
-                mDir = Dir.UP;
+                mMainTank.setDir(Dir.UP);
             }
             if (mBD) {
-                mDir = Dir.DOWN;
+                mMainTank.setDir(Dir.DOWN);
             }
             if (mBL) {
-                mDir = Dir.LEFT;
+                mMainTank.setDir(Dir.LEFT);
             }
             if (mBR) {
-                mDir = Dir.RIGHT;
+                mMainTank.setDir(Dir.RIGHT);
             }
         }
     }
