@@ -1,5 +1,8 @@
+
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -12,19 +15,22 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    public static final int GAME_WIDTH = 800;
+    public static final int GAME_HEIGHT = 600;
+
     /**
      * 主战坦克
      */
     private Tank mMainTank = new Tank(200, 200, Dir.DOWN);
 
-    private Bullet mBullet = new Bullet(500, 500, Dir.DOWN);
+    private Bullet mBullet = new Bullet(50, 50, Dir.DOWN);
 
     /**
      * 坦克游戏的主窗口
      */
     public TankFrame() {
         //  设置窗口尺寸
-        setSize(800, 600);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         //  设置窗口是否可扩展
         setResizable(false);
         //  设置窗口标题
@@ -40,6 +46,25 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+
+    /**
+     * 双缓冲机制解决闪烁问题
+     */
+    private Image offScreenImage = null;
+
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
     }
 
     /**

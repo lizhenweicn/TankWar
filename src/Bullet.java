@@ -10,12 +10,12 @@ public class Bullet {
     /**
      * 子弹的宽度
      */
-    private static final int TANK_WIDTH = 5;
+    private static final int TANK_WIDTH = 50;
 
     /**
      * 子弹的高度
      */
-    private static final int TANK_HEIGHT = 5;
+    private static final int TANK_HEIGHT = 50;
 
     /**
      * 子弹移动速度
@@ -37,9 +37,19 @@ public class Bullet {
      */
     private Dir mBulletDir;
 
+    /**
+     * 无参构造
+     */
     public Bullet() {
     }
 
+    /**
+     * 构造方法
+     *
+     * @param bulletX   初始化 X 轴
+     * @param bulletY   初始化 Y 轴
+     * @param bulletDir 初始化的方向
+     */
     public Bullet(int bulletX, int bulletY, Dir bulletDir) {
         this.mBulletX = bulletX;
         this.mBulletY = bulletY;
@@ -52,7 +62,11 @@ public class Bullet {
      * @param g 画笔
      */
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.RED);
         g.fillOval(mBulletX, mBulletY, TANK_WIDTH, TANK_HEIGHT);
+        g.setColor(c);
+
         mBulletY += BULLET_SPEED;
     }
 

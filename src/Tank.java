@@ -103,7 +103,10 @@ public class Tank {
      * @param g 画笔
      */
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
+        g.setColor(c);
         move();
     }
 
