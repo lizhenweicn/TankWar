@@ -17,6 +17,8 @@ public class TankFrame extends Frame {
      */
     private Tank mMainTank = new Tank(200, 200, Dir.DOWN);
 
+    private Bullet mBullet = new Bullet(500, 500, Dir.DOWN);
+
     /**
      * 坦克游戏的主窗口
      */
@@ -48,6 +50,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         mMainTank.paint(g);
+        mBullet.paint(g);
     }
 
     /**
@@ -136,16 +139,16 @@ public class TankFrame extends Frame {
             } else {
                 mMainTank.setMoving(true);
                 if (mBU) {
-                    mMainTank.setDir(Dir.UP);
+                    mMainTank.setTankDir(Dir.UP);
                 }
                 if (mBD) {
-                    mMainTank.setDir(Dir.DOWN);
+                    mMainTank.setTankDir(Dir.DOWN);
                 }
                 if (mBL) {
-                    mMainTank.setDir(Dir.LEFT);
+                    mMainTank.setTankDir(Dir.LEFT);
                 }
                 if (mBR) {
-                    mMainTank.setDir(Dir.RIGHT);
+                    mMainTank.setTankDir(Dir.RIGHT);
                 }
             }
         }

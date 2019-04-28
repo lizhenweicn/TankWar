@@ -18,6 +18,11 @@ public class Tank {
     private static final int TANK_HEIGHT = 50;
 
     /**
+     * 坦克移动速度
+     */
+    private static final int TANK_STEP = 5;
+
+    /**
      * 坦克的 X 轴位置
      */
     private int mTankX;
@@ -30,7 +35,7 @@ public class Tank {
     /**
      * 坦克方向
      */
-    private Dir mDir;
+    private Dir mTankDir;
 
     /**
      * 坦克运动状态
@@ -38,17 +43,12 @@ public class Tank {
     private boolean moving = false;
 
     /**
-     * 坦克移动的步长（ 速度 ）
-     */
-    private static final int TANK_STEP = 2;
-
-    /**
      * 获取坦克方向
      *
      * @return 方向枚举
      */
-    public Dir getDir() {
-        return mDir;
+    public Dir getTankDir() {
+        return mTankDir;
     }
 
     /**
@@ -56,18 +56,24 @@ public class Tank {
      *
      * @param dir 方向枚举
      */
-    public void setDir(Dir dir) {
-        this.mDir = dir;
+    public void setTankDir(Dir dir) {
+        this.mTankDir = dir;
     }
 
     /**
-     * 设置坦克是否移动的状态
-     * @return
+     * 获取坦克是否移动的状态
+     *
+     * @return 是否运动
      */
     public boolean isMoving() {
         return moving;
     }
 
+    /**
+     * 设置坦克是否移动的状态
+     *
+     * @param moving 是否运动
+     */
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
@@ -88,7 +94,7 @@ public class Tank {
     public Tank(int tankX, int tankY, Dir dir) {
         this.mTankX = tankX;
         this.mTankY = tankY;
-        this.mDir = dir;
+        this.mTankDir = dir;
     }
 
     /**
@@ -110,7 +116,7 @@ public class Tank {
             return;
         }
 
-        switch (mDir) {
+        switch (mTankDir) {
             case UP:
                 mTankY -= TANK_STEP;
                 break;
