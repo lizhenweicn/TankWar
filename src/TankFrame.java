@@ -131,17 +131,22 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setMainTankDir() {
-            if (mBU) {
-                mMainTank.setDir(Dir.UP);
-            }
-            if (mBD) {
-                mMainTank.setDir(Dir.DOWN);
-            }
-            if (mBL) {
-                mMainTank.setDir(Dir.LEFT);
-            }
-            if (mBR) {
-                mMainTank.setDir(Dir.RIGHT);
+            if (!mBU && !mBD && !mBL && !mBR) {
+                mMainTank.setMoving(false);
+            } else {
+                mMainTank.setMoving(true);
+                if (mBU) {
+                    mMainTank.setDir(Dir.UP);
+                }
+                if (mBD) {
+                    mMainTank.setDir(Dir.DOWN);
+                }
+                if (mBL) {
+                    mMainTank.setDir(Dir.LEFT);
+                }
+                if (mBR) {
+                    mMainTank.setDir(Dir.RIGHT);
+                }
             }
         }
     }

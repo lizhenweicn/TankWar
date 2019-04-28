@@ -28,9 +28,14 @@ public class Tank {
     private int mTankY;
 
     /**
-     * 坦克的方向
+     * 坦克方向
      */
     private Dir mDir;
+
+    /**
+     * 坦克运动状态
+     */
+    private boolean moving = false;
 
     /**
      * 坦克移动的步长（ 速度 ）
@@ -56,6 +61,18 @@ public class Tank {
     }
 
     /**
+     * 设置坦克是否移动的状态
+     * @return
+     */
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    /**
      * 无参构造
      */
     public Tank() {
@@ -64,14 +81,14 @@ public class Tank {
     /**
      * 构造方法
      *
-     * @param mTankX 初始化 X 轴
-     * @param mTankY 初始化 Y 轴
-     * @param mDir   初始化的方向
+     * @param tankX 初始化 X 轴
+     * @param tankY 初始化 Y 轴
+     * @param dir   初始化的方向
      */
-    public Tank(int mTankX, int mTankY, Dir mDir) {
-        this.mTankX = mTankX;
-        this.mTankY = mTankY;
-        this.mDir = mDir;
+    public Tank(int tankX, int tankY, Dir dir) {
+        this.mTankX = tankX;
+        this.mTankY = tankY;
+        this.mDir = dir;
     }
 
     /**
@@ -81,6 +98,18 @@ public class Tank {
      */
     public void paint(Graphics g) {
         g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
+        move();
+    }
+
+    /**
+     * 坦克移动的方法
+     */
+    private void move() {
+
+        if (!isMoving()) {
+            return;
+        }
+
         switch (mDir) {
             case UP:
                 mTankY -= TANK_STEP;
