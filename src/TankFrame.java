@@ -25,7 +25,7 @@ public class TankFrame extends Frame {
     /**
      * 坦克移动的步长（ 速度 ）
      */
-    private static final int TANK_STEP = 200;
+    private static final int TANK_STEP = 2;
 
     /**
      * 坦克的 X 轴位置
@@ -36,6 +36,11 @@ public class TankFrame extends Frame {
      * 坦克的 Y 轴位置
      */
     private int mTankY = 200;
+
+    /**
+     * 坦克的方向
+     */
+    private Dir mDir = Dir.DOWN;
 
     public TankFrame() {
         //  设置窗口尺寸
@@ -64,8 +69,23 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        System.out.println("窗口重新绘制");
         g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
+        switch (mDir) {
+            case UP:
+                mTankY -= TANK_STEP;
+                break;
+            case DOWN:
+                mTankY += TANK_STEP;
+                break;
+            case LEFT:
+                mTankX -= TANK_STEP;
+                break;
+            case RIGHT:
+                mTankX += TANK_STEP;
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -93,7 +113,6 @@ public class TankFrame extends Frame {
          */
         private boolean mBR = false;
 
-
         /**
          * 当键盘按下时调用
          *
@@ -106,7 +125,7 @@ public class TankFrame extends Frame {
                     mBU = true;
                     break;
                 case KeyEvent.VK_DOWN:
-                    mBU = true;
+                    mBD = true;
                     break;
                 case KeyEvent.VK_LEFT:
                     mBL = true;
@@ -117,9 +136,7 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-
-            //  通知窗口进行重绘
-            repaint();
+            setMainTankDir();
         }
 
         /**
@@ -134,7 +151,7 @@ public class TankFrame extends Frame {
                     mBU = false;
                     break;
                 case KeyEvent.VK_DOWN:
-                    mBU = false;
+                    mBD = false;
                     break;
                 case KeyEvent.VK_LEFT:
                     mBL = false;
@@ -144,6 +161,25 @@ public class TankFrame extends Frame {
                     break;
                 default:
                     break;
+            }
+            setMainTankDir();
+        }
+
+        /**
+         * 设置坦克方向
+         */
+        private void setMainTankDir() {
+            if (mBU) {
+                mDir = Dir.UP;
+            }
+            if (mBD) {
+                mDir = Dir.DOWN;
+            }
+            if (mBL) {
+                mDir = Dir.LEFT;
+            }
+            if (mBR) {
+                mDir = Dir.RIGHT;
             }
         }
     }
