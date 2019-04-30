@@ -21,7 +21,7 @@ public class Bullet {
     /**
      * 子弹移动速度
      */
-    private static final int BULLET_SPEED = 10;
+    private static final int BULLET_SPEED = 6;
 
     /**
      * 子弹的 X 轴位置

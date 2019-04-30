@@ -184,6 +184,7 @@ public class TankFrame extends Frame {
                     mBR = false;
                     break;
                 case KeyEvent.VK_CONTROL:
+                case KeyEvent.VK_SPACE:
                     //  control 键抬起时发射子弹
                     mMainTank.fire();
                     break;

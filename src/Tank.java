@@ -22,7 +22,7 @@ public class Tank {
     /**
      * 坦克移动速度
      */
-    private static final int TANK_SPEED = 5;
+    private static final int TANK_SPEED = 4;
 
     /**
      * 坦克的 X 轴位置
