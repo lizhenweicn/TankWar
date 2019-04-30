@@ -12,6 +12,7 @@ import java.io.IOException;
 public class ResManager {
 
     public static BufferedImage mTankU, mTankD, mTankL, mTankR;
+
     public static BufferedImage mBulletU, mBulletD, mBulletL, mBulletR;
 
     static {

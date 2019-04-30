@@ -113,11 +113,22 @@ public class Tank {
      * @param g 画笔
      */
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillRect(mTankX, mTankY, TANK_WIDTH, TANK_HEIGHT);
-        g.setColor(c);
-
+        switch (mTankDir) {
+            case UP:
+                g.drawImage(ResManager.mTankU, mTankX, mTankY, null);
+                break;
+            case DOWN:
+                g.drawImage(ResManager.mTankD, mTankX, mTankY, null);
+                break;
+            case LEFT:
+                g.drawImage(ResManager.mTankL, mTankX, mTankY, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResManager.mTankR, mTankX, mTankY, null);
+                break;
+            default:
+                break;
+        }
         move();
     }
 
