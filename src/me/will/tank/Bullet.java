@@ -1,3 +1,5 @@
+package me.will.tank;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -79,10 +81,22 @@ public class Bullet {
             mTankFrame.getBulletList().remove(this);
         }
 
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(mBulletX, mBulletY, BULLET_WIDTH, BULLET_HEIGHT);
-        g.setColor(c);
+        switch (mBulletDir) {
+            case UP:
+                g.drawImage(ResManager.mBulletU, mBulletX, mBulletY, null);
+                break;
+            case DOWN:
+                g.drawImage(ResManager.mBulletD, mBulletX, mBulletY, null);
+                break;
+            case LEFT:
+                g.drawImage(ResManager.mBulletL, mBulletX, mBulletY, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResManager.mBulletR, mBulletX, mBulletY, null);
+                break;
+            default:
+                break;
+        }
 
         move();
     }

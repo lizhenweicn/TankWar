@@ -1,3 +1,5 @@
+package me.will.tank;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;

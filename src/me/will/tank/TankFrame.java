@@ -1,3 +1,5 @@
+package me.will.tank;
+
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -30,6 +32,11 @@ public class TankFrame extends Frame {
      * 主战坦克
      */
     private Tank mMainTank = new Tank(200, 200, Dir.DOWN, this);
+
+    /**
+     * 坦克容器
+     */
+    private List<Tank> mTankList = new ArrayList<>();
 
     /**
      * 子弹容器
