@@ -25,11 +25,6 @@ public class Bullet {
     private static final int BULLET_SPEED = 6;
 
     /**
-     * 坦克移动速度( 斜向 )
-     */
-    private static final int BULLET_SPEED_OBLIQUE = (int) Math.sqrt(2 * BULLET_SPEED * BULLET_SPEED);
-
-    /**
      * 子弹的 X 轴位置
      */
     private int mBulletX;
@@ -136,20 +131,20 @@ public class Bullet {
                 mBulletY += BULLET_SPEED;
                 break;
             case LU:
-                mBulletX -= BULLET_SPEED_OBLIQUE;
-                mBulletY -= BULLET_SPEED_OBLIQUE;
+                mBulletX -= BULLET_SPEED - 2;
+                mBulletY -= BULLET_SPEED - 2;
                 break;
             case LD:
-                mBulletX -= BULLET_SPEED_OBLIQUE;
-                mBulletY += BULLET_SPEED_OBLIQUE;
+                mBulletX -= BULLET_SPEED - 2;
+                mBulletY += BULLET_SPEED - 2;
                 break;
             case RU:
-                mBulletX += BULLET_SPEED_OBLIQUE;
-                mBulletY -= BULLET_SPEED_OBLIQUE;
+                mBulletX += BULLET_SPEED - 2;
+                mBulletY -= BULLET_SPEED - 2;
                 break;
             case RD:
-                mBulletX += BULLET_SPEED_OBLIQUE;
-                mBulletY += BULLET_SPEED_OBLIQUE;
+                mBulletX += BULLET_SPEED - 2;
+                mBulletY += BULLET_SPEED - 2;
                 break;
             default:
                 break;

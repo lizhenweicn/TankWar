@@ -26,11 +26,6 @@ public class Tank {
     private static final int TANK_SPEED = 4;
 
     /**
-     * 坦克移动速度( 斜向 )
-     */
-    private static final int TANK_SPEED_OBLIQUE = (int) Math.sqrt(2 * TANK_SPEED * TANK_SPEED);
-
-    /**
      * 坦克的 X 轴位置
      */
     private int mTankX;
@@ -171,20 +166,20 @@ public class Tank {
                 mTankX += TANK_SPEED;
                 break;
             case LU:
-                mTankX -= TANK_SPEED_OBLIQUE;
-                mTankY -= TANK_SPEED_OBLIQUE;
+                mTankX -= TANK_SPEED - 1;
+                mTankY -= TANK_SPEED - 1;
                 break;
             case LD:
-                mTankX -= TANK_SPEED_OBLIQUE;
-                mTankY += TANK_SPEED_OBLIQUE;
+                mTankX -= TANK_SPEED - 1;
+                mTankY += TANK_SPEED - 1;
                 break;
             case RU:
-                mTankX += TANK_SPEED_OBLIQUE;
-                mTankY -= TANK_SPEED_OBLIQUE;
+                mTankX += TANK_SPEED - 1;
+                mTankY -= TANK_SPEED - 1;
                 break;
             case RD:
-                mTankX += TANK_SPEED_OBLIQUE;
-                mTankY += TANK_SPEED_OBLIQUE;
+                mTankX += TANK_SPEED - 1;
+                mTankY += TANK_SPEED - 1;
                 break;
             default:
                 break;
