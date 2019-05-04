@@ -31,7 +31,7 @@ public class TankFrame extends Frame {
     /**
      * 主战坦克
      */
-    private Tank mMainTank = new Tank(200, 200, Dir.DOWN, this);
+    private Tank mMainTank = new Tank(200, 200, Dir.D, this);
 
     /**
      * 坦克容器
@@ -210,16 +210,40 @@ public class TankFrame extends Frame {
             } else {
                 mMainTank.setMoving(true);
                 if (mBU) {
-                    mMainTank.setTankDir(Dir.UP);
+                    if (mBL) {
+                        mMainTank.setTankDir(Dir.LU);
+                    } else if (mBR) {
+                        mMainTank.setTankDir(Dir.RU);
+                    } else {
+                        mMainTank.setTankDir(Dir.U);
+                    }
                 }
                 if (mBD) {
-                    mMainTank.setTankDir(Dir.DOWN);
+                    if (mBL) {
+                        mMainTank.setTankDir(Dir.LD);
+                    } else if (mBR) {
+                        mMainTank.setTankDir(Dir.RD);
+                    } else {
+                        mMainTank.setTankDir(Dir.D);
+                    }
                 }
                 if (mBL) {
-                    mMainTank.setTankDir(Dir.LEFT);
+                    if (mBU) {
+                        mMainTank.setTankDir(Dir.LU);
+                    } else if (mBD) {
+                        mMainTank.setTankDir(Dir.LD);
+                    } else {
+                        mMainTank.setTankDir(Dir.L);
+                    }
                 }
                 if (mBR) {
-                    mMainTank.setTankDir(Dir.RIGHT);
+                    if (mBU) {
+                        mMainTank.setTankDir(Dir.RU);
+                    } else if (mBD) {
+                        mMainTank.setTankDir(Dir.RD);
+                    } else {
+                        mMainTank.setTankDir(Dir.R);
+                    }
                 }
             }
         }

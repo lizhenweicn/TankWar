@@ -1,6 +1,5 @@
 package me.will.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -21,9 +20,14 @@ public class Bullet {
     private static final int BULLET_HEIGHT = 30;
 
     /**
-     * 子弹移动速度
+     * 子弹移动速度( 正向 )
      */
     private static final int BULLET_SPEED = 6;
+
+    /**
+     * 坦克移动速度( 斜向 )
+     */
+    private static final int BULLET_SPEED_OBLIQUE = (int) Math.sqrt(2 * BULLET_SPEED * BULLET_SPEED);
 
     /**
      * 子弹的 X 轴位置
@@ -82,17 +86,29 @@ public class Bullet {
         }
 
         switch (mBulletDir) {
-            case UP:
+            case U:
                 g.drawImage(ResManager.mBulletU, mBulletX, mBulletY, null);
                 break;
-            case DOWN:
+            case D:
                 g.drawImage(ResManager.mBulletD, mBulletX, mBulletY, null);
                 break;
-            case LEFT:
+            case L:
                 g.drawImage(ResManager.mBulletL, mBulletX, mBulletY, null);
                 break;
-            case RIGHT:
+            case R:
                 g.drawImage(ResManager.mBulletR, mBulletX, mBulletY, null);
+                break;
+            case LU:
+                g.drawImage(ResManager.mBulletLU, mBulletX, mBulletY, null);
+                break;
+            case LD:
+                g.drawImage(ResManager.mBulletLD, mBulletX, mBulletY, null);
+                break;
+            case RU:
+                g.drawImage(ResManager.mBulletRU, mBulletX, mBulletY, null);
+                break;
+            case RD:
+                g.drawImage(ResManager.mBulletRD, mBulletX, mBulletY, null);
                 break;
             default:
                 break;
@@ -107,17 +123,33 @@ public class Bullet {
     private void move() {
 
         switch (mBulletDir) {
-            case LEFT:
+            case L:
                 mBulletX -= BULLET_SPEED;
                 break;
-            case UP:
+            case U:
                 mBulletY -= BULLET_SPEED;
                 break;
-            case RIGHT:
+            case R:
                 mBulletX += BULLET_SPEED;
                 break;
-            case DOWN:
+            case D:
                 mBulletY += BULLET_SPEED;
+                break;
+            case LU:
+                mBulletX -= BULLET_SPEED_OBLIQUE;
+                mBulletY -= BULLET_SPEED_OBLIQUE;
+                break;
+            case LD:
+                mBulletX -= BULLET_SPEED_OBLIQUE;
+                mBulletY += BULLET_SPEED_OBLIQUE;
+                break;
+            case RU:
+                mBulletX += BULLET_SPEED_OBLIQUE;
+                mBulletY -= BULLET_SPEED_OBLIQUE;
+                break;
+            case RD:
+                mBulletX += BULLET_SPEED_OBLIQUE;
+                mBulletY += BULLET_SPEED_OBLIQUE;
                 break;
             default:
                 break;

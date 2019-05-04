@@ -1,6 +1,5 @@
 package me.will.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
@@ -22,9 +21,14 @@ public class Tank {
     private static final int TANK_HEIGHT = 50;
 
     /**
-     * 坦克移动速度
+     * 坦克移动速度( 正向 )
      */
     private static final int TANK_SPEED = 4;
+
+    /**
+     * 坦克移动速度( 斜向 )
+     */
+    private static final int TANK_SPEED_OBLIQUE = (int) Math.sqrt(2 * TANK_SPEED * TANK_SPEED);
 
     /**
      * 坦克的 X 轴位置
@@ -114,17 +118,29 @@ public class Tank {
      */
     public void paint(Graphics g) {
         switch (mTankDir) {
-            case UP:
+            case U:
                 g.drawImage(ResManager.mTankU, mTankX, mTankY, null);
                 break;
-            case DOWN:
+            case D:
                 g.drawImage(ResManager.mTankD, mTankX, mTankY, null);
                 break;
-            case LEFT:
+            case L:
                 g.drawImage(ResManager.mTankL, mTankX, mTankY, null);
                 break;
-            case RIGHT:
+            case R:
                 g.drawImage(ResManager.mTankR, mTankX, mTankY, null);
+                break;
+            case LU:
+                g.drawImage(ResManager.mTankLU, mTankX, mTankY, null);
+                break;
+            case LD:
+                g.drawImage(ResManager.mTankLD, mTankX, mTankY, null);
+                break;
+            case RU:
+                g.drawImage(ResManager.mTankRU, mTankX, mTankY, null);
+                break;
+            case RD:
+                g.drawImage(ResManager.mTankRD, mTankX, mTankY, null);
                 break;
             default:
                 break;
@@ -142,17 +158,33 @@ public class Tank {
         }
 
         switch (mTankDir) {
-            case UP:
+            case U:
                 mTankY -= TANK_SPEED;
                 break;
-            case DOWN:
+            case D:
                 mTankY += TANK_SPEED;
                 break;
-            case LEFT:
+            case L:
                 mTankX -= TANK_SPEED;
                 break;
-            case RIGHT:
+            case R:
                 mTankX += TANK_SPEED;
+                break;
+            case LU:
+                mTankX -= TANK_SPEED_OBLIQUE;
+                mTankY -= TANK_SPEED_OBLIQUE;
+                break;
+            case LD:
+                mTankX -= TANK_SPEED_OBLIQUE;
+                mTankY += TANK_SPEED_OBLIQUE;
+                break;
+            case RU:
+                mTankX += TANK_SPEED_OBLIQUE;
+                mTankY -= TANK_SPEED_OBLIQUE;
+                break;
+            case RD:
+                mTankX += TANK_SPEED_OBLIQUE;
+                mTankY += TANK_SPEED_OBLIQUE;
                 break;
             default:
                 break;

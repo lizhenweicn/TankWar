@@ -7,6 +7,6 @@ package me.will.tank;
  */
 public enum Dir {
 
-    UP, DOWN, LEFT, RIGHT
+    U, D, L, R, LU, LD, RU, RD
 
 }
