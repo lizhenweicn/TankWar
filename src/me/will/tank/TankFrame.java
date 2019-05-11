@@ -43,6 +43,13 @@ public class TankFrame extends Frame {
      */
     private List<Bullet> mBulletList = new ArrayList<>();
 
+    /**
+     * 爆炸容器
+     */
+    private List<Explode> mExplodeList =  new ArrayList<>();
+
+    private Explode explode = new Explode(100, 100, this);
+
     public List<Tank> getTankList() {
         return mTankList;
     }
@@ -135,6 +142,9 @@ public class TankFrame extends Frame {
                 bullet.collideWith(tank);
             }
         }
+
+        //  绘制爆炸
+        explode.paint(g);
 
     }
 

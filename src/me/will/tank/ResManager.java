@@ -22,6 +22,11 @@ public class ResManager {
      */
     public static BufferedImage mBulletU, mBulletD, mBulletL, mBulletR, mBulletLU, mBulletLD, mBulletRU, mBulletRD;
 
+    /**
+     * 坦克爆炸组图
+     */
+    public static BufferedImage[] explodes = new BufferedImage[16];
+
     static {
         try {
             //  坦克八个方向图片
@@ -43,6 +48,11 @@ public class ResManager {
             mBulletLD = ImageIO.read(Objects.requireNonNull(ResManager.class.getClassLoader().getResourceAsStream("images/bulletLD.gif")));
             mBulletRU = ImageIO.read(Objects.requireNonNull(ResManager.class.getClassLoader().getResourceAsStream("images/bulletRU.gif")));
             mBulletRD = ImageIO.read(Objects.requireNonNull(ResManager.class.getClassLoader().getResourceAsStream("images/bulletRD.gif")));
+
+            //  坦克爆炸组图
+            for (int i = 0; i < 16; i++) {
+                explodes[i] = ImageIO.read(Objects.requireNonNull(ResManager.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif")));
+            }
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
