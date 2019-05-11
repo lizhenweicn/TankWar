@@ -47,7 +47,7 @@ public class ResManager {
             mGoodTankRD = ImageUtil.rotateImage(mGoodTankU, +135);
 
             //  敌方坦克八个方向图片
-            mBadTankU = ImageIO.read(Objects.requireNonNull(ResManager.class.getClassLoader().getResourceAsStream("images/GoodTank1.png")));
+            mBadTankU = ImageIO.read(Objects.requireNonNull(ResManager.class.getClassLoader().getResourceAsStream("images/BadTank1.png")));
             mBadTankD = ImageUtil.rotateImage(mBadTankU, 180);
             mBadTankL = ImageUtil.rotateImage(mBadTankU, -90);
             mBadTankR = ImageUtil.rotateImage(mBadTankU, +90);
