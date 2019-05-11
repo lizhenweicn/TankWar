@@ -14,12 +14,12 @@ public class Tank {
     /**
      * 坦克的宽度
      */
-    private static final int TANK_WIDTH = ResManager.mTankD.getWidth();
+    private static final int TANK_WIDTH = ResManager.mGoodTankD.getWidth();
 
     /**
      * 坦克的高度
      */
-    private static final int TANK_HEIGHT = ResManager.mTankD.getHeight();
+    private static final int TANK_HEIGHT = ResManager.mGoodTankD.getHeight();
 
     /**
      * 坦克移动速度( 正向 )
@@ -44,7 +44,7 @@ public class Tank {
     /**
      * 坦克运动状态
      */
-    private boolean moving = true;
+    private boolean moving;
 
     /**
      * 游戏窗口
@@ -145,6 +145,7 @@ public class Tank {
         this.mTankDir = dir;
         this.mGroup = group;
         this.mTankFrame = tankFrame;
+        this.moving = (group == Group.BAD);
     }
 
     /**
@@ -160,28 +161,28 @@ public class Tank {
 
         switch (mTankDir) {
             case U:
-                g.drawImage(ResManager.mTankU, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankU : ResManager.mBadTankU, mTankX, mTankY, null);
                 break;
             case D:
-                g.drawImage(ResManager.mTankD, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankD : ResManager.mBadTankD, mTankX, mTankY, null);
                 break;
             case L:
-                g.drawImage(ResManager.mTankL, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankL : ResManager.mBadTankL, mTankX, mTankY, null);
                 break;
             case R:
-                g.drawImage(ResManager.mTankR, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankR : ResManager.mBadTankR, mTankX, mTankY, null);
                 break;
             case LU:
-                g.drawImage(ResManager.mTankLU, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankLU : ResManager.mBadTankLU, mTankX, mTankY, null);
                 break;
             case LD:
-                g.drawImage(ResManager.mTankLD, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankLD : ResManager.mBadTankLD, mTankX, mTankY, null);
                 break;
             case RU:
-                g.drawImage(ResManager.mTankRU, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankRU : ResManager.mBadTankRU, mTankX, mTankY, null);
                 break;
             case RD:
-                g.drawImage(ResManager.mTankRD, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankRD : ResManager.mBadTankRD, mTankX, mTankY, null);
                 break;
             default:
                 break;
@@ -232,9 +233,15 @@ public class Tank {
         }
 
         //  敌方坦克随机开火
-        if (mRandom.nextInt(100) > 95) {
+        if (mGroup == Group.BAD && mRandom.nextInt(100) > 95) {
             this.fire();
         }
+
+        //  敌方坦克随机移动
+        if (mGroup == Group.BAD && mRandom.nextInt(100) > 95) {
+            this.mTankDir = Dir.values()[mRandom.nextInt(4)];
+        }
+
     }
 
     /**

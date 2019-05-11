@@ -191,7 +191,7 @@ public class TankFrame extends Frame {
         public void keyPressed(KeyEvent e) {
 
             //  播放坦克移动的音效
-            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
 
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
