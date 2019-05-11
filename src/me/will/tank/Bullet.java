@@ -51,6 +51,19 @@ public class Bullet {
     private TankFrame mTankFrame;
 
     /**
+     * 子弹的分组
+     */
+    private Group mGroup;
+
+    public Group getGroup() {
+        return mGroup;
+    }
+
+    public void setGroup(Group mGroup) {
+        this.mGroup = mGroup;
+    }
+
+    /**
      * 无参构造
      */
     public Bullet() {
@@ -63,10 +76,11 @@ public class Bullet {
      * @param bulletY   初始化 Y 轴
      * @param bulletDir 初始化的方向
      */
-    public Bullet(int bulletX, int bulletY, Dir bulletDir, TankFrame tankFrame) {
+    public Bullet(int bulletX, int bulletY, Dir bulletDir, Group group, TankFrame tankFrame) {
         this.mBulletX = bulletX;
         this.mBulletY = bulletY;
         this.mBulletDir = bulletDir;
+        this.mGroup = group;
         this.mTankFrame = tankFrame;
     }
 
@@ -163,6 +177,13 @@ public class Bullet {
      * @param tank 坦克实例
      */
     public void collideWith(Tank tank) {
+
+        //  默认不开启队友伤害
+        if (this.mGroup == tank.getGroup()) {
+            return;
+        }
+
+        //  碰撞检测
         Rectangle rectBullet = new Rectangle(this.mBulletX, this.mBulletY, BULLET_WIDTH, BULLET_HEIGHT);
         Rectangle rectTank = new Rectangle(tank.getTankX(), tank.getTankY(), tank.getTankWidth(), tank.getTankHeight());
         if (rectBullet.intersects(rectTank)) {

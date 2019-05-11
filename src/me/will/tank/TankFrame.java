@@ -31,7 +31,7 @@ public class TankFrame extends Frame {
     /**
      * 主战坦克
      */
-    private Tank mMainTank = new Tank(200, 400, Dir.U, this);
+    private Tank mMainTank = new Tank(200, 400, Dir.U, Group.GOOD, this);
 
     /**
      * 敌方容器
