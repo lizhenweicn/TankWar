@@ -23,7 +23,7 @@ public class Bullet {
     /**
      * 子弹移动速度( 正向 )
      */
-    private static final int BULLET_SPEED = 6;
+    private static final int BULLET_SPEED = PropertyManager.getAsInt("BULLET_SPEED", 6);
 
     /**
      * 子弹的 X 轴位置

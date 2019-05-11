@@ -21,17 +21,21 @@ public class TankFrame extends Frame {
     /**
      * 游戏区域宽度
      */
-    public static final int GAME_WIDTH = 1080;
+    public static final int GAME_WIDTH = PropertyManager.getAsInt("GAME_WIDTH", 1080);
 
     /**
      * 游戏区域高度
      */
-    public static final int GAME_HEIGHT = 960;
+    public static final int GAME_HEIGHT = PropertyManager.getAsInt("GAME_HEIGHT", 960);
 
     /**
      * 主战坦克
      */
-    private Tank mMainTank = new Tank(200, 400, Dir.U, Group.GOOD, this);
+    private Tank mMainTank = new Tank(
+            (GAME_WIDTH - Tank.TANK_WIDTH) / 2,
+            GAME_HEIGHT - Tank.TANK_HEIGHT - Bullet.BULLET_HEIGHT,
+            Dir.U, Group.GOOD, this
+    );
 
     /**
      * 敌方容器
@@ -192,7 +196,6 @@ public class TankFrame extends Frame {
 
             ////  播放坦克移动的音效
             //  new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
-
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     mBU = true;
@@ -219,6 +222,7 @@ public class TankFrame extends Frame {
          */
         @Override
         public void keyReleased(KeyEvent e) {
+            System.out.println("KeyEvent - keyReleased : " + e.getKeyCode());
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     mBU = false;

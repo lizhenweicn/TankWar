@@ -1,0 +1,14 @@
+# 游戏主界面的宽度
+GAME_WIDTH=1080
+
+# 游戏主界面的高度
+GAME_HEIGHT=960
+
+# 初始化时敌方坦克的数量
+INIT_TANK_COUNT=10
+
+# 初始化时坦克的速度
+TASK_SPEED=2
+
+# 初始化时子弹的速度
+BULLET_SPEED=6

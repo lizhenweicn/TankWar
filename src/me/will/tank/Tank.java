@@ -15,17 +15,17 @@ public class Tank {
     /**
      * 坦克的宽度
      */
-    private static final int TANK_WIDTH = ResManager.mGoodTankD.getWidth();
+    public static final int TANK_WIDTH = ResManager.mGoodTankD.getWidth();
 
     /**
      * 坦克的高度
      */
-    private static final int TANK_HEIGHT = ResManager.mGoodTankD.getHeight();
+    public static final int TANK_HEIGHT = ResManager.mGoodTankD.getHeight();
 
     /**
      * 坦克移动速度( 正向 )
      */
-    private static final int TANK_SPEED = 2;
+    private static final int TANK_SPEED = PropertyManager.getAsInt("TASK_SPEED", 2);
 
     /**
      * 坦克的 X 轴位置
@@ -156,6 +156,7 @@ public class Tank {
         this.mGroup = group;
         this.mTankFrame = tankFrame;
         this.moving = (group == Group.BAD);
+//        this.moving = false;
 
         this.mRectangle.x = tankX;
         this.mRectangle.y = tankY;

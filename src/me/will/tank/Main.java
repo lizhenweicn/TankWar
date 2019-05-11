@@ -12,8 +12,10 @@ public class Main {
         TankFrame tankFrame = new TankFrame();
 
         //  初始化敌方坦克
-        for (int i = 0; i < 5; i++) {
-            Tank tank = new Tank(50 + i * 80, 200, Dir.D, Group.BAD, tankFrame);
+        int tankListSize = PropertyManager.getAsInt("INIT_TANK_COUNT", 5);
+        int offset = (TankFrame.GAME_WIDTH - tankListSize * Tank.TANK_WIDTH) / (tankListSize + 1);
+        for (int i = 0; i < tankListSize; i++) {
+            Tank tank = new Tank((Tank.TANK_WIDTH + offset) * i + offset, offset, Dir.D, Group.BAD, tankFrame);
             tankFrame.getTankList().add(tank);
         }
 
