@@ -12,12 +12,12 @@ public class Explode {
     /**
      * 爆炸的宽度
      */
-    private static final int EXPLODE_WIDTH = ResManager.explodes[0].getWidth();
+    public static final int EXPLODE_WIDTH = ResManager.explodes[0].getWidth();
 
     /**
      * 爆炸的高度
      */
-    private static final int EXPLODE_HEIGHT = ResManager.explodes[0].getHeight();
+    public static final int EXPLODE_HEIGHT = ResManager.explodes[0].getHeight();
 
     /**
      * 爆炸的 X 轴位置
@@ -58,7 +58,7 @@ public class Explode {
     public void paint(Graphics g) {
         g.drawImage(ResManager.explodes[mStep++], mExplodeX, mExplodeY, null);
         if (mStep >= ResManager.explodes.length) {
-            mStep = 0;
+            this.mExplodeFrame.getExplodeList().remove(this);
         }
     }
 

@@ -232,7 +232,7 @@ public class Tank {
         }
 
         //  敌方坦克随机开火
-        if( mRandom.nextInt(100) > 95 ) {
+        if (mRandom.nextInt(100) > 95) {
             this.fire();
         }
     }
@@ -273,6 +273,10 @@ public class Tank {
                 break;
         }
         bulletList.add(bullet);
+
+        if (this.mGroup == Group.GOOD) {
+            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+        }
     }
 
     /**

@@ -189,6 +189,11 @@ public class Bullet {
         if (rectBullet.intersects(rectTank)) {
             this.die();
             tank.die();
+            //  显示爆炸效果
+            int explodeX = tank.getTankX() + tank.getTankWidth() / 2 - Explode.EXPLODE_WIDTH / 2;
+            int explodeY = tank.getTankY() + tank.getTankHeight() / 2 - Explode.EXPLODE_HEIGHT / 2;
+            Explode explode = new Explode(explodeX, explodeY, mTankFrame);
+            this.mTankFrame.getExplodeList().add(explode);
         }
     }
 

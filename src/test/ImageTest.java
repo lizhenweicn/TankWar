@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.Test;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.junit.jupiter.api.Test;
+import static junit.framework.TestCase.assertNotNull;
 
 class ImageTest {
 

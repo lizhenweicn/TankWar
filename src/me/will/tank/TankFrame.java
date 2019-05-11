@@ -46,7 +46,7 @@ public class TankFrame extends Frame {
     /**
      * 爆炸容器
      */
-    private List<Explode> mExplodeList =  new ArrayList<>();
+    private List<Explode> mExplodeList = new ArrayList<>();
 
     public List<Tank> getTankList() {
         return mTankList;
@@ -62,6 +62,14 @@ public class TankFrame extends Frame {
 
     public void setBulletList(List<Bullet> mBulletList) {
         this.mBulletList = mBulletList;
+    }
+
+    public List<Explode> getExplodeList() {
+        return mExplodeList;
+    }
+
+    public void setExplodeList(List<Explode> mExplodeList) {
+        this.mExplodeList = mExplodeList;
     }
 
     /**
@@ -117,6 +125,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量:" + mBulletList.size(), 10, 60);
         g.drawString("敌人的数量:" + mTankList.size(), 10, 80);
+        g.drawString("爆炸的数量:" + mExplodeList.size(), 10, 100);
         g.setColor(c);
 
         //  绘制主战坦克
@@ -132,6 +141,11 @@ public class TankFrame extends Frame {
             mTankList.get(i).paint(g);
         }
 
+        //  绘制爆炸效果
+        for (int i = 0; i < mExplodeList.size(); i++) {
+            mExplodeList.get(i).paint(g);
+        }
+
         //  碰撞检测
         for (int i = 0; i < mBulletList.size(); i++) {
             for (int j = 0; j < mTankList.size(); j++) {
@@ -140,9 +154,6 @@ public class TankFrame extends Frame {
                 bullet.collideWith(tank);
             }
         }
-
-        //  绘制爆炸
-
 
     }
 
@@ -178,6 +189,10 @@ public class TankFrame extends Frame {
          */
         @Override
         public void keyPressed(KeyEvent e) {
+
+            //  播放坦克移动的音效
+            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     mBU = true;
