@@ -39,10 +39,16 @@ public class Explode {
      */
     private TankFrame mExplodeFrame;
 
+    public Explode() {
+    }
+
     public Explode(int mExplodeX, int mExplodeY, TankFrame tankFrame) {
         this.mExplodeX = mExplodeX;
         this.mExplodeY = mExplodeY;
         this.mExplodeFrame = tankFrame;
+
+        //  播放爆炸音效
+        new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
 
     /**

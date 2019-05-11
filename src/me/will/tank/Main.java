@@ -17,9 +17,12 @@ public class Main {
             tankFrame.getTankList().add(tank);
         }
 
+        ////  播放背景音乐
+        //  new Thread(() -> new Audio("audio/war1.wav").loop()).start();
+
         //  每隔 50 毫秒主窗口自动绘制
         while (true) {
-            Thread.sleep(50);
+            Thread.sleep(16);
             tankFrame.repaint();
         }
 

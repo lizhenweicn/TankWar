@@ -21,12 +21,12 @@ public class TankFrame extends Frame {
     /**
      * 游戏区域宽度
      */
-    public static final int GAME_WIDTH = 800;
+    public static final int GAME_WIDTH = 1080;
 
     /**
      * 游戏区域高度
      */
-    public static final int GAME_HEIGHT = 600;
+    public static final int GAME_HEIGHT = 960;
 
     /**
      * 主战坦克
@@ -47,8 +47,6 @@ public class TankFrame extends Frame {
      * 爆炸容器
      */
     private List<Explode> mExplodeList =  new ArrayList<>();
-
-    private Explode explode = new Explode(100, 100, this);
 
     public List<Tank> getTankList() {
         return mTankList;
@@ -144,7 +142,7 @@ public class TankFrame extends Frame {
         }
 
         //  绘制爆炸
-        explode.paint(g);
+
 
     }
 
