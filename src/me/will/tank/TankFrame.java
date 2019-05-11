@@ -31,10 +31,10 @@ public class TankFrame extends Frame {
     /**
      * 主战坦克
      */
-    private Tank mMainTank = new Tank(200, 200, Dir.D, this);
+    private Tank mMainTank = new Tank(200, 400, Dir.U, this);
 
     /**
-     * 坦克容器
+     * 敌方容器
      */
     private List<Tank> mTankList = new ArrayList<>();
 
@@ -42,6 +42,14 @@ public class TankFrame extends Frame {
      * 子弹容器
      */
     private List<Bullet> mBulletList = new ArrayList<>();
+
+    public List<Tank> getTankList() {
+        return mTankList;
+    }
+
+    public void setTankList(List<Tank> mTankList) {
+        this.mTankList = mTankList;
+    }
 
     public List<Bullet> getBulletList() {
         return mBulletList;
@@ -105,18 +113,18 @@ public class TankFrame extends Frame {
         g.drawString("子弹的数量:" + mBulletList.size(), 10, 60);
         g.setColor(c);
 
+        //  绘制主战坦克
         mMainTank.paint(g);
+
+        //  绘制子弹
         for (int i = 0; i < mBulletList.size(); i++) {
             mBulletList.get(i).paint(g);
         }
-//        for (Iterator<Bullet> it = mBulletList.iterator(); it.hasNext(); ) {
-//            Bullet bullet = it.next();
-//            if (bullet.isLive()) {
-//                bullet.paint(g);
-//            } else {
-//                it.remove();
-//            }
-//        }
+
+        //  绘制敌方坦克
+        for (int i = 0; i < mTankList.size(); i++) {
+            mTankList.get(i).paint(g);
+        }
     }
 
     /**
