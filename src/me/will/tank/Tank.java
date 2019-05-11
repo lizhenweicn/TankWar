@@ -255,25 +255,25 @@ public class Tank {
                 bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY - Bullet.BULLET_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case D:
-                bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY + TANK_HEIGHT + Bullet.BULLET_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
+                bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY + TANK_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case L:
-                bullet = new Bullet(this.mTankX, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
+                bullet = new Bullet(this.mTankX - Bullet.BULLET_WIDTH, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case R:
                 bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case LU:
-                bullet = new Bullet(this.mTankX, this.mTankY - TANK_SPEED, this.mTankDir, this.mGroup, this.mTankFrame);
+                bullet = new Bullet(this.mTankX - Bullet.BULLET_WIDTH, this.mTankY - Bullet.BULLET_WIDTH, this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case LD:
-                bullet = new Bullet(this.mTankX, this.mTankY + TANK_WIDTH, this.mTankDir, this.mGroup, this.mTankFrame);
+                bullet = new Bullet(this.mTankX - TANK_WIDTH + Bullet.BULLET_WIDTH, this.mTankY + TANK_WIDTH, this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case RU:
-                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY - TANK_SPEED, this.mTankDir, this.mGroup, this.mTankFrame);
+                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY - (Bullet.BULLET_WIDTH >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             case RD:
-                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY, this.mTankDir, this.mGroup, this.mTankFrame);
+                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY + TANK_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
                 break;
             default:
                 bullet = null;
