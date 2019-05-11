@@ -242,6 +242,31 @@ public class Tank {
             this.mTankDir = Dir.values()[mRandom.nextInt(4)];
         }
 
+        //  边界检测
+        boundCheck();
+    }
+
+    /**
+     * 边界检测
+     */
+    private void boundCheck() {
+
+        if (this.mTankX < 0) {
+            this.mTankX = 0;
+        }
+
+        if (this.mTankY < 20) {
+            this.mTankY = 20;
+        }
+
+        if (this.mTankX > TankFrame.GAME_WIDTH - Tank.TANK_WIDTH) {
+            this.mTankX = TankFrame.GAME_WIDTH - Tank.TANK_WIDTH;
+        }
+
+        if (this.mTankY > TankFrame.GAME_HEIGHT - Tank.TANK_HEIGHT) {
+            this.mTankY = TankFrame.GAME_HEIGHT - Tank.TANK_HEIGHT;
+        }
+
     }
 
     /**
