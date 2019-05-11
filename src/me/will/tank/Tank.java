@@ -1,6 +1,7 @@
 package me.will.tank;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 import java.util.Random;
 
@@ -102,6 +103,11 @@ public class Tank {
         this.moving = moving;
     }
 
+    /**
+     * 矩形范围
+     */
+    private Rectangle mRectangle = new Rectangle();
+
     public int getTankX() {
         return mTankX;
     }
@@ -126,6 +132,10 @@ public class Tank {
         this.mGroup = mGroup;
     }
 
+    public Rectangle getRectangle() {
+        return mRectangle;
+    }
+
     /**
      * 无参构造
      */
@@ -146,6 +156,11 @@ public class Tank {
         this.mGroup = group;
         this.mTankFrame = tankFrame;
         this.moving = (group == Group.BAD);
+
+        this.mRectangle.x = tankX;
+        this.mRectangle.y = tankY;
+        this.mRectangle.width = TANK_WIDTH;
+        this.mRectangle.height = TANK_HEIGHT;
     }
 
     /**
@@ -244,6 +259,11 @@ public class Tank {
 
         //  边界检测
         boundCheck();
+
+        //  更新矩形坐标
+        this.mRectangle.x = this.mTankX;
+        this.mRectangle.y = this.mTankY;
+
     }
 
     /**

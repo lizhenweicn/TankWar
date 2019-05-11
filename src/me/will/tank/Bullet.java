@@ -55,12 +55,21 @@ public class Bullet {
      */
     private Group mGroup;
 
+    /**
+     * 矩形范围
+     */
+    private Rectangle mRectangle = new Rectangle();
+
     public Group getGroup() {
         return mGroup;
     }
 
     public void setGroup(Group mGroup) {
         this.mGroup = mGroup;
+    }
+
+    public Rectangle getRectangle() {
+        return mRectangle;
     }
 
     /**
@@ -82,6 +91,11 @@ public class Bullet {
         this.mBulletDir = bulletDir;
         this.mGroup = group;
         this.mTankFrame = tankFrame;
+
+        this.mRectangle.x = bulletX;
+        this.mRectangle.y = bulletY;
+        this.mRectangle.width = BULLET_WIDTH;
+        this.mRectangle.height = BULLET_HEIGHT;
     }
 
     /**
@@ -165,6 +179,10 @@ public class Bullet {
                 break;
         }
 
+        //  更新矩形坐标
+        this.mRectangle.x = this.mBulletX;
+        this.mRectangle.y = this.mBulletY;
+
         if (mBulletX < 0 || mBulletY < 0 || mBulletX > TankFrame.GAME_WIDTH || mBulletY > TankFrame.GAME_HEIGHT) {
             mIsLiving = false;
         }
@@ -184,9 +202,7 @@ public class Bullet {
         }
 
         //  碰撞检测
-        Rectangle rectBullet = new Rectangle(this.mBulletX, this.mBulletY, BULLET_WIDTH, BULLET_HEIGHT);
-        Rectangle rectTank = new Rectangle(tank.getTankX(), tank.getTankY(), tank.getTankWidth(), tank.getTankHeight());
-        if (rectBullet.intersects(rectTank)) {
+        if (this.getRectangle().intersects(tank.getRectangle())) {
             this.die();
             tank.die();
             //  显示爆炸效果
