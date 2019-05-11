@@ -1,6 +1,7 @@
 package me.will.tank;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * @author : zhenweiLi
@@ -42,7 +43,7 @@ public class Bullet {
     /**
      * 子弹是否存在
      */
-    private boolean mIsLive = true;
+    private boolean mIsLiving = true;
 
     /**
      * 游戏窗口
@@ -76,7 +77,7 @@ public class Bullet {
      */
     public void paint(Graphics g) {
 
-        if (!mIsLive) {
+        if (!mIsLiving) {
             mTankFrame.getBulletList().remove(this);
         }
 
@@ -151,9 +152,30 @@ public class Bullet {
         }
 
         if (mBulletX < 0 || mBulletY < 0 || mBulletX > TankFrame.GAME_WIDTH || mBulletY > TankFrame.GAME_HEIGHT) {
-            mIsLive = false;
+            mIsLiving = false;
         }
 
+    }
+
+    /**
+     * 检测坦克和子弹是否发生碰撞的方法
+     *
+     * @param tank 坦克实例
+     */
+    public void collideWith(Tank tank) {
+        Rectangle rectBullet = new Rectangle(this.mBulletX, this.mBulletY, BULLET_WIDTH, BULLET_HEIGHT);
+        Rectangle rectTank = new Rectangle(tank.getTankX(), tank.getTankY(), tank.getTankWidth(), tank.getTankHeight());
+        if (rectBullet.intersects(rectTank)) {
+            this.die();
+            tank.die();
+        }
+    }
+
+    /**
+     * 子弹消亡
+     */
+    private void die() {
+        this.mIsLiving = false;
     }
 
 }

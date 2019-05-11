@@ -69,6 +69,11 @@ public class Tank {
     }
 
     /**
+     * 坦克是否存活
+     */
+    private boolean mIsLiving = true;
+
+    /**
      * 获取坦克是否移动的状态
      *
      * @return 是否运动
@@ -84,6 +89,22 @@ public class Tank {
      */
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public int getTankX() {
+        return mTankX;
+    }
+
+    public int getTankY() {
+        return mTankY;
+    }
+
+    public int getTankWidth() {
+        return TANK_WIDTH;
+    }
+
+    public int getTankHeight() {
+        return TANK_HEIGHT;
     }
 
     /**
@@ -112,6 +133,11 @@ public class Tank {
      * @param g 画笔
      */
     public void paint(Graphics g) {
+
+        if (!mIsLiving) {
+            mTankFrame.getTankList().remove(this);
+        }
+
         switch (mTankDir) {
             case U:
                 g.drawImage(ResManager.mTankU, mTankX, mTankY, null);
@@ -222,5 +248,12 @@ public class Tank {
                 break;
         }
         bulletList.add(bullet);
+    }
+
+    /**
+     * 坦克报废
+     */
+    public void die() {
+        this.mIsLiving = false;
     }
 }
