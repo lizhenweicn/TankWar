@@ -13,12 +13,12 @@ public class Tank {
     /**
      * 坦克的宽度
      */
-    private static final int TANK_WIDTH = 50;
+    private static final int TANK_WIDTH = ResManager.mTankD.getWidth();
 
     /**
      * 坦克的高度
      */
-    private static final int TANK_HEIGHT = 50;
+    private static final int TANK_HEIGHT = ResManager.mTankD.getHeight();
 
     /**
      * 坦克移动速度( 正向 )
@@ -191,6 +191,36 @@ public class Tank {
      */
     public void fire() {
         List<Bullet> bulletList = mTankFrame.getBulletList();
-        bulletList.add(new Bullet(this.mTankX, this.mTankY, this.mTankDir, this.mTankFrame));
+        Bullet bullet;
+        switch (mTankDir) {
+            case U:
+                bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY - Bullet.BULLET_HEIGHT, this.mTankDir, this.mTankFrame);
+                break;
+            case D:
+                bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY + TANK_HEIGHT + Bullet.BULLET_HEIGHT, this.mTankDir, this.mTankFrame);
+                break;
+            case L:
+                bullet = new Bullet(this.mTankX, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mTankFrame);
+                break;
+            case R:
+                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mTankFrame);
+                break;
+            case LU:
+                bullet = new Bullet(this.mTankX, this.mTankY - TANK_SPEED, this.mTankDir, this.mTankFrame);
+                break;
+            case LD:
+                bullet = new Bullet(this.mTankX, this.mTankY + TANK_WIDTH, this.mTankDir, this.mTankFrame);
+                break;
+            case RU:
+                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY - TANK_SPEED, this.mTankDir, this.mTankFrame);
+                break;
+            case RD:
+                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY, this.mTankDir, this.mTankFrame);
+                break;
+            default:
+                bullet = null;
+                break;
+        }
+        bulletList.add(bullet);
     }
 }

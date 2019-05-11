@@ -12,12 +12,12 @@ public class Bullet {
     /**
      * 子弹的宽度
      */
-    private static final int BULLET_WIDTH = 30;
+    public static final int BULLET_WIDTH = ResManager.mBulletD.getWidth();
 
     /**
      * 子弹的高度
      */
-    private static final int BULLET_HEIGHT = 30;
+    public static final int BULLET_HEIGHT = ResManager.mBulletD.getHeight();
 
     /**
      * 子弹移动速度( 正向 )
