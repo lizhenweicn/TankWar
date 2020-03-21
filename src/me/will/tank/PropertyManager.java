@@ -10,37 +10,28 @@ import java.util.Properties;
  */
 public class PropertyManager {
 
-    public static Properties property = new Properties();
+    private static final Properties PROPERTY = new Properties();
+
+    private PropertyManager() {
+    }
 
     static {
         try {
-            property.load(PropertyManager.class.getClassLoader().getResourceAsStream("config"));
+            PROPERTY.load(PropertyManager.class.getClassLoader().getResourceAsStream("config"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static Object get(String key) {
-
-        if (property == null) {
-            return null;
-        }
-
-        return property.get(key);
+        return PROPERTY.get(key);
     }
 
-    public static int getAsInt(String key, int defInt) {
-
-        if (property == null) {
-            return defInt;
-        }
-
-        String value = (String) property.get(key);
-
+    static int getAsInt(String key, int defInt) {
+        String value = (String) get(key);
         if (null == value || value.isEmpty()) {
             return defInt;
         }
-
         return Integer.parseInt(value);
     }
 

@@ -32,6 +32,9 @@ public class ResManager {
      */
     public static BufferedImage[] explodes = new BufferedImage[16];
 
+    private ResManager() {
+    }
+
     static {
 
         try {
