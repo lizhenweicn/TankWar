@@ -2,7 +2,6 @@ package me.will.tank;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -108,6 +107,11 @@ public class Tank {
      */
     private Rectangle mRectangle = new Rectangle();
 
+    /**
+     * 坦克的开火策略（ 默认策略 ）
+     */
+    private FireStrategy fireStrategy = new SafeFireStrategy();
+
     public int getTankX() {
         return mTankX;
     }
@@ -134,6 +138,10 @@ public class Tank {
 
     public Rectangle getRectangle() {
         return mRectangle;
+    }
+
+    public TankFrame getTankFrame() {
+        return mTankFrame;
     }
 
     /**
@@ -294,42 +302,7 @@ public class Tank {
      * 发射子弹
      */
     public void fire() {
-        List<Bullet> bulletList = mTankFrame.getBulletList();
-        Bullet bullet;
-        switch (mTankDir) {
-            case U:
-                bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY - Bullet.BULLET_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case D:
-                bullet = new Bullet(this.mTankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), this.mTankY + TANK_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case L:
-                bullet = new Bullet(this.mTankX - Bullet.BULLET_WIDTH, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case R:
-                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case LU:
-                bullet = new Bullet(this.mTankX - Bullet.BULLET_WIDTH, this.mTankY - Bullet.BULLET_WIDTH, this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case LD:
-                bullet = new Bullet(this.mTankX - TANK_WIDTH + Bullet.BULLET_WIDTH, this.mTankY + TANK_WIDTH, this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case RU:
-                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY - (Bullet.BULLET_WIDTH >> 1), this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            case RD:
-                bullet = new Bullet(this.mTankX + TANK_WIDTH, this.mTankY + TANK_HEIGHT, this.mTankDir, this.mGroup, this.mTankFrame);
-                break;
-            default:
-                bullet = null;
-                break;
-        }
-        bulletList.add(bullet);
-
-        if (this.mGroup == Group.GOOD) {
-            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-        }
+        fireStrategy.fire(this);
     }
 
     /**

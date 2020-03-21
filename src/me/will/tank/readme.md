@@ -12,3 +12,6 @@
 
 PropertyManager 类修改为单例模式。
 
+### 策略模式
+
+Tank 类修改开火策略。

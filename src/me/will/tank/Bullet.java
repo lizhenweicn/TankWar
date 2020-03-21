@@ -96,6 +96,8 @@ public class Bullet {
         this.mRectangle.y = bulletY;
         this.mRectangle.width = BULLET_WIDTH;
         this.mRectangle.height = BULLET_HEIGHT;
+
+        tankFrame.getBulletList().add(this);
     }
 
     /**
