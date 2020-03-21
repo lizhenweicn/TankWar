@@ -14,7 +14,7 @@ public class SuperFireStrategy implements FireStrategy {
         int tankX = tank.getTankX();
         int tankY = tank.getTankY();
         Group group = tank.getGroup();
-        TankFrame tankFrame = tank.getTankFrame();
+        GameModel tankFrame = tank.getGameModel();
         if (group == Group.GOOD) {
             new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY - Bullet.BULLET_HEIGHT, Dir.U, group, tankFrame);
             new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY + TANK_HEIGHT, Dir.D, group, tankFrame);

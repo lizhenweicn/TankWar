@@ -27,7 +27,7 @@ public class DefaultFireStrategy implements FireStrategy {
         int tankY = tank.getTankY();
         Dir tankDir = tank.getTankDir();
         Group group = tank.getGroup();
-        TankFrame tankFrame = tank.getTankFrame();
+        GameModel tankFrame = tank.getGameModel();
         switch (tankDir) {
             case U:
                 new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY - Bullet.BULLET_HEIGHT, tankDir, group, tankFrame);

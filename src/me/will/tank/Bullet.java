@@ -46,9 +46,9 @@ public class Bullet {
     private boolean mIsLiving = true;
 
     /**
-     * 游戏窗口
+     * 游戏道具模型
      */
-    private TankFrame mTankFrame;
+    private GameModel mGameModel;
 
     /**
      * 子弹的分组
@@ -85,19 +85,19 @@ public class Bullet {
      * @param bulletY   初始化 Y 轴
      * @param bulletDir 初始化的方向
      */
-    public Bullet(int bulletX, int bulletY, Dir bulletDir, Group group, TankFrame tankFrame) {
+    public Bullet(int bulletX, int bulletY, Dir bulletDir, Group group, GameModel gameModel) {
         this.mBulletX = bulletX;
         this.mBulletY = bulletY;
         this.mBulletDir = bulletDir;
         this.mGroup = group;
-        this.mTankFrame = tankFrame;
+        this.mGameModel = gameModel;
 
         this.mRectangle.x = bulletX;
         this.mRectangle.y = bulletY;
         this.mRectangle.width = BULLET_WIDTH;
         this.mRectangle.height = BULLET_HEIGHT;
 
-        tankFrame.getBulletList().add(this);
+        this.mGameModel.getBulletList().add(this);
     }
 
     /**
@@ -108,7 +108,7 @@ public class Bullet {
     public void paint(Graphics g) {
 
         if (!mIsLiving) {
-            mTankFrame.getBulletList().remove(this);
+            mGameModel.getBulletList().remove(this);
         }
 
         switch (mBulletDir) {
@@ -210,8 +210,7 @@ public class Bullet {
             //  显示爆炸效果
             int explodeX = tank.getTankX() + tank.getTankWidth() / 2 - Explode.EXPLODE_WIDTH / 2;
             int explodeY = tank.getTankY() + tank.getTankHeight() / 2 - Explode.EXPLODE_HEIGHT / 2;
-            Explode explode = new Explode(explodeX, explodeY, mTankFrame);
-            this.mTankFrame.getExplodeList().add(explode);
+            new Explode(explodeX, explodeY, mGameModel);
         }
     }
 

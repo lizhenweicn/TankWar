@@ -47,9 +47,9 @@ public class Tank {
     private boolean moving;
 
     /**
-     * 游戏窗口
+     * 游戏物品模型
      */
-    private TankFrame mTankFrame;
+    private GameModel mGameModel;
 
     /**
      * 获取坦克方向
@@ -140,8 +140,8 @@ public class Tank {
         return mRectangle;
     }
 
-    public TankFrame getTankFrame() {
-        return mTankFrame;
+    public GameModel getGameModel() {
+        return mGameModel;
     }
 
     /**
@@ -157,12 +157,12 @@ public class Tank {
      * @param tankY 初始化 Y 轴
      * @param dir   初始化的方向
      */
-    public Tank(int tankX, int tankY, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int tankX, int tankY, Dir dir, Group group, GameModel gameModel) {
         this.mTankX = tankX;
         this.mTankY = tankY;
         this.mTankDir = dir;
         this.mGroup = group;
-        this.mTankFrame = tankFrame;
+        this.mGameModel = gameModel;
         this.moving = (group == Group.BAD);
 //        this.moving = false;
 
@@ -170,6 +170,7 @@ public class Tank {
         this.mRectangle.y = tankY;
         this.mRectangle.width = TANK_WIDTH;
         this.mRectangle.height = TANK_HEIGHT;
+        this.mGameModel.getTankList().add(this);
     }
 
     /**
@@ -180,7 +181,7 @@ public class Tank {
     public void paint(Graphics g) {
 
         if (!mIsLiving) {
-            mTankFrame.getTankList().remove(this);
+            mGameModel.getTankList().remove(this);
         }
 
         switch (mTankDir) {

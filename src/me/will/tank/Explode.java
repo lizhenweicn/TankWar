@@ -37,16 +37,16 @@ public class Explode {
     /**
      * 游戏窗口
      */
-    private TankFrame mExplodeFrame;
+    private GameModel mGameModel;
 
     public Explode() {
     }
 
-    public Explode(int mExplodeX, int mExplodeY, TankFrame tankFrame) {
+    public Explode(int mExplodeX, int mExplodeY, GameModel gameModel) {
         this.mExplodeX = mExplodeX;
         this.mExplodeY = mExplodeY;
-        this.mExplodeFrame = tankFrame;
-
+        this.mGameModel = gameModel;
+        this.mGameModel.getExplodeList().add(this);
         //  播放爆炸音效
         new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
@@ -58,7 +58,7 @@ public class Explode {
     public void paint(Graphics g) {
         g.drawImage(ResManager.explodes[mStep++], mExplodeX, mExplodeY, null);
         if (mStep >= ResManager.explodes.length) {
-            this.mExplodeFrame.getExplodeList().remove(this);
+            this.mGameModel.getExplodeList().remove(this);
         }
     }
 
