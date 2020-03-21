@@ -7,7 +7,7 @@ import java.awt.Graphics;
  * @date :2019-05-11 20:10
  * DESC : 爆炸类
  */
-public class Explode {
+public class Explode extends BaseGameObject {
 
     /**
      * 爆炸的宽度
@@ -46,7 +46,7 @@ public class Explode {
         this.mExplodeX = mExplodeX;
         this.mExplodeY = mExplodeY;
         this.mGameModel = gameModel;
-        this.mGameModel.getExplodeList().add(this);
+        this.mGameModel.add(this);
         //  播放爆炸音效
         new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
@@ -55,10 +55,11 @@ public class Explode {
      * 绘制爆炸
      * @param g  画笔
      */
+    @Override
     public void paint(Graphics g) {
         g.drawImage(ResManager.explodes[mStep++], mExplodeX, mExplodeY, null);
         if (mStep >= ResManager.explodes.length) {
-            this.mGameModel.getExplodeList().remove(this);
+            this.mGameModel.remove(this);
         }
     }
 

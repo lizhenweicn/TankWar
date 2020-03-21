@@ -8,7 +8,7 @@ import java.awt.Rectangle;
  * @date :2019-04-28 20:52
  * DESC : 子弹类
  */
-public class Bullet {
+public class Bullet extends BaseGameObject {
 
     /**
      * 子弹的宽度
@@ -97,7 +97,7 @@ public class Bullet {
         this.mRectangle.width = BULLET_WIDTH;
         this.mRectangle.height = BULLET_HEIGHT;
 
-        this.mGameModel.getBulletList().add(this);
+        this.mGameModel.add(this);
     }
 
     /**
@@ -105,10 +105,11 @@ public class Bullet {
      *
      * @param g 画笔
      */
+    @Override
     public void paint(Graphics g) {
 
         if (!mIsLiving) {
-            mGameModel.getBulletList().remove(this);
+            mGameModel.remove(this);
         }
 
         switch (mBulletDir) {

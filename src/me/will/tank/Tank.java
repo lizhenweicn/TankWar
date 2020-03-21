@@ -9,7 +9,7 @@ import java.util.Random;
  * @date :2019-04-28 20:23
  * DESC : 坦克类
  */
-public class Tank {
+public class Tank extends BaseGameObject {
 
     /**
      * 坦克的宽度
@@ -170,7 +170,7 @@ public class Tank {
         this.mRectangle.y = tankY;
         this.mRectangle.width = TANK_WIDTH;
         this.mRectangle.height = TANK_HEIGHT;
-        this.mGameModel.getTankList().add(this);
+        this.mGameModel.add(this);
     }
 
     /**
@@ -178,10 +178,11 @@ public class Tank {
      *
      * @param g 画笔
      */
+    @Override
     public void paint(Graphics g) {
 
         if (!mIsLiving) {
-            mGameModel.getTankList().remove(this);
+            mGameModel.remove(this);
         }
 
         switch (mTankDir) {
