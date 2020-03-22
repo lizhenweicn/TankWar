@@ -144,7 +144,7 @@ public class TankFrame extends Frame {
          */
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("KeyEvent - keyReleased : " + e.getKeyCode());
+            //System.out.println("KeyEvent - keyReleased : " + e.getKeyCode());
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     mBU = false;

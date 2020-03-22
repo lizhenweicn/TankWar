@@ -308,6 +308,21 @@ public class Tank extends BaseGameObject {
     }
 
     /**
+     * 检测坦克之间是否发生碰撞的方法
+     *
+     * @param tank 坦克实例
+     */
+    public void collideWith(Tank tank) {
+        //  碰撞检测
+        if (this.getRectangle().intersects(tank.getRectangle())) {
+            if (this != tank) {
+                this.moving = false;
+                tank.moving = false;
+            }
+        }
+    }
+
+    /**
      * 坦克报废
      */
     public void die() {

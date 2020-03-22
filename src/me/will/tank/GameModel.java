@@ -61,6 +61,9 @@ public class GameModel {
 //        this.mExplodeList = mExplodeList;
 //    }
 
+    private Collider mCollider = new BulletTankCollider();
+    private Collider mCollider2 = new TankTankCollider();
+
     public GameModel() {
         //  主战坦克
         mMainTank = new Tank(
@@ -93,7 +96,7 @@ public class GameModel {
         g.setColor(c);
 
         //  绘制主战坦克
-        mMainTank.paint(g);
+//        mMainTank.paint(g);
 
 //        //  绘制子弹
 //        for (int i = 0; i < mBulletList.size(); i++) {
@@ -119,13 +122,14 @@ public class GameModel {
         }
 
         //  碰撞检测
-//        for (int i = 0; i < mBulletList.size(); i++) {
-//            for (int j = 0; j < mTankList.size(); j++) {
-//                Bullet bullet = mBulletList.get(i);
-//                Tank tank = mTankList.get(j);
-//                bullet.collideWith(tank);
-//            }
-//        }
+        for (int i = 0; i < mGameObjectList.size(); i++) {
+            for (int j = 0; j < mGameObjectList.size(); j++) {
+                BaseGameObject o1 = mGameObjectList.get(i);
+                BaseGameObject o2 = mGameObjectList.get(j);
+                mCollider.collide(o1, o2);
+                mCollider2.collide(o1, o2);
+            }
+        }
 
     }
 
