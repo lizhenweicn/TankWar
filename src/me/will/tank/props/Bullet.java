@@ -65,7 +65,7 @@ public class Bullet extends BaseGameProps {
         this.mRectangle.height = ResManager.getBulletHeight();
         this.mBulletDir = bulletDir;
         this.mGroup = group;
-        GameModel.getInstance().add(new RectBorderDecorator(this));
+        GameModel.getInstance().add(this);
     }
 
     /**

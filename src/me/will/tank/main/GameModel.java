@@ -1,5 +1,7 @@
 package me.will.tank.main;
 
+import me.will.tank.decorator.GamePropsDecorator;
+import me.will.tank.decorator.RectBorderDecorator;
 import me.will.tank.enums.Dir;
 import me.will.tank.enums.Group;
 import me.will.tank.manager.PropertyManager;
@@ -105,7 +107,21 @@ public class GameModel {
             for (int j = 0; j < mGameObjectList.size(); j++) {
                 BaseGameProps o1 = mGameObjectList.get(i);
                 BaseGameProps o2 = mGameObjectList.get(j);
-                mColliderChain.collide(o1, o2);
+////            mColliderChain.collide(o1, o2);
+                ////  兼容装饰器模式
+                BaseGameProps gameProps1;
+                if (o1 instanceof GamePropsDecorator) {
+                    gameProps1 = ((GamePropsDecorator) o1).getGameProps();
+                } else {
+                    gameProps1 = o1;
+                }
+                BaseGameProps gameProps2;
+                if (o2 instanceof GamePropsDecorator) {
+                    gameProps2 = ((GamePropsDecorator) o2).getGameProps();
+                } else {
+                    gameProps2 = o2;
+                }
+                mColliderChain.collide(gameProps1, gameProps2);
             }
         }
 

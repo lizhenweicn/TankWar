@@ -37,8 +37,6 @@ public class BulletTankCollider implements Collider {
 
         //  碰撞检测
         if (bullet.getRectangle().intersects(tank.getRectangle())) {
-            System.out.println("bullet : " + bullet.getRectangle());
-            System.out.println("tank : " + tank.getRectangle().toString());
             bullet.die();
             tank.die();
             //  显示爆炸效果

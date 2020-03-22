@@ -130,7 +130,7 @@ public class Tank extends BaseGameProps {
         this.mTankDir = dir;
         this.mGroup = group;
         this.moving = (group == Group.BAD);
-        GameModel.getInstance().add(new RectBorderDecorator(this));
+        GameModel.getInstance().add(this);
     }
 
     /**

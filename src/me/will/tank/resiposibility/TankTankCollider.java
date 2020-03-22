@@ -6,7 +6,7 @@ import me.will.tank.props.Tank;
 /**
  * @author : zhenweiLi
  * @date :2020-03-22 07:40
- * DESC : 子弹和坦克的碰撞检测器
+ * DESC : 坦克之间的碰撞检测器
  */
 public class TankTankCollider implements Collider {
     @Override

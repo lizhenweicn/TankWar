@@ -16,6 +16,10 @@ public class GamePropsDecorator extends BaseGameProps {
      */
     private BaseGameProps mGameProps;
 
+    public BaseGameProps getGameProps() {
+        return mGameProps;
+    }
+
     public GamePropsDecorator(BaseGameProps gameProps) {
         this.mGameProps = gameProps;
     }

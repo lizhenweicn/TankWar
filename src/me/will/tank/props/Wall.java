@@ -1,5 +1,6 @@
 package me.will.tank.props;
 
+import me.will.tank.decorator.RectBorderDecorator;
 import me.will.tank.main.GameModel;
 
 import java.awt.Color;
@@ -17,7 +18,7 @@ public class Wall extends BaseGameProps {
         this.mRectangle.y = wallY;
         this.mRectangle.width = wallW;
         this.mRectangle.height = wallH;
-        GameModel.getInstance().add(this);
+        GameModel.getInstance().add(new RectBorderDecorator(this));
     }
 
     @Override
