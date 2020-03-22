@@ -9,6 +9,8 @@ import java.awt.Graphics;
  */
 public abstract class BaseGameObject {
 
+
+
     /**
      * 游戏道具绘制自己的方法
      *

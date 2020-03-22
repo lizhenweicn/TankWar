@@ -37,6 +37,16 @@ public class Tank extends BaseGameObject {
     private int mTankY;
 
     /**
+     * 坦克的原 X 轴位置
+     */
+    private int mTankOldX;
+
+    /**
+     * 坦克的原 Y 轴位置
+     */
+    private int mTankOldY;
+
+    /**
      * 坦克方向
      */
     private Dir mTankDir;
@@ -120,6 +130,22 @@ public class Tank extends BaseGameObject {
         return mTankY;
     }
 
+    public int getTankOldX() {
+        return mTankOldX;
+    }
+
+    public void setTankOldX(int mTankOldX) {
+        this.mTankOldX = mTankOldX;
+    }
+
+    public int getmTankOldY() {
+        return mTankOldY;
+    }
+
+    public void setmTankOldY(int mTankOldY) {
+        this.mTankOldY = mTankOldY;
+    }
+
     public int getTankWidth() {
         return TANK_WIDTH;
     }
@@ -142,6 +168,10 @@ public class Tank extends BaseGameObject {
 
     public GameModel getGameModel() {
         return mGameModel;
+    }
+
+    public boolean isLiving() {
+        return mIsLiving;
     }
 
     /**
@@ -220,6 +250,10 @@ public class Tank extends BaseGameObject {
      * 坦克移动的方法
      */
     private void move() {
+
+        //  记录上一次的位置
+        mTankOldX = mTankX;
+        mTankOldY = mTankY;
 
         if (!isMoving()) {
             return;
@@ -307,28 +341,9 @@ public class Tank extends BaseGameObject {
         fireStrategy.fire(this);
     }
 
-    /**
-     * 检测坦克之间是否发生碰撞的方法
-     *
-     * @param tank 坦克实例
-     */
-    public void collideWith(Tank tank) {
-
-        //  坦克死亡则无需检测
-        if (!this.mIsLiving) {
-            return;
-        }
-
-        //  碰撞检测 : 两个坦克相撞分别回到屏幕左右两侧的还原点。
-        //  注意 - 自己撞自己是没有任何意义的。
-        if (this.getRectangle().intersects(tank.getRectangle())) {
-            if (this != tank) {
-                this.mTankX = 0;
-                this.mTankY = TankFrame.GAME_HEIGHT >> 1;
-                tank.mTankX = TankFrame.GAME_WIDTH;
-                tank.mTankY = TankFrame.GAME_HEIGHT >> 1;
-            }
-        }
+    public void back() {
+        mTankX = mTankOldX;
+        mTankY = mTankOldY;
     }
 
     /**

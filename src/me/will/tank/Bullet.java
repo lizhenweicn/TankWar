@@ -72,6 +72,10 @@ public class Bullet extends BaseGameObject {
         return mRectangle;
     }
 
+    public boolean isLiving() {
+        return mIsLiving;
+    }
+
     /**
      * 无参构造
      */
@@ -193,37 +197,9 @@ public class Bullet extends BaseGameObject {
     }
 
     /**
-     * 检测坦克和子弹是否发生碰撞的方法
-     *
-     * @param tank 坦克实例
-     */
-    public void collideWith(Tank tank) {
-
-        //  默认不开启队友伤害
-        if (this.mGroup == tank.getGroup()) {
-            return;
-        }
-
-        //  子弹死亡则无需检测
-        if (!this.mIsLiving) {
-            return;
-        }
-
-        //  碰撞检测
-        if (this.getRectangle().intersects(tank.getRectangle())) {
-            this.die();
-            tank.die();
-            //  显示爆炸效果
-            int explodeX = tank.getTankX() + tank.getTankWidth() / 2 - Explode.EXPLODE_WIDTH / 2;
-            int explodeY = tank.getTankY() + tank.getTankHeight() / 2 - Explode.EXPLODE_HEIGHT / 2;
-            new Explode(explodeX, explodeY, mGameModel);
-        }
-    }
-
-    /**
      * 子弹消亡
      */
-    private void die() {
+    public void die() {
         this.mIsLiving = false;
     }
 

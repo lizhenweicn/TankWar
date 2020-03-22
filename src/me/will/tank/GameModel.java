@@ -28,9 +28,16 @@ public class GameModel {
     /**
      * 游戏物体碰撞检测链
      */
-    private ColliderChain mColliderChain = new ColliderChain().add(new BulletTankCollider()).add(new TankTankCollider());
+    private ColliderChain mColliderChain = new ColliderChain();
 
     public GameModel() {
+        //  初始化碰撞检测链
+        mColliderChain
+                .add(new TankTankCollider())
+                .add(new TankWallCollider())
+                .add(new BulletTankCollider())
+                .add(new BulletWallCollider())
+        ;
         //  主战坦克
         mMainTank = new Tank(
                 (GAME_WIDTH - Tank.TANK_WIDTH) / 2,
@@ -43,6 +50,11 @@ public class GameModel {
         for (int i = 0; i < tankListSize; i++) {
             new Tank((Tank.TANK_WIDTH + offset) * i + offset, offset, Dir.D, Group.BAD, this);
         }
+        //  初始化墙
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
     }
 
     public void add(BaseGameObject gameObject) {
