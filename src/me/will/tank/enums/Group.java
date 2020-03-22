@@ -1,4 +1,4 @@
-package me.will.tank;
+package me.will.tank.enums;
 
 /**
  * @author : zhenweiLi

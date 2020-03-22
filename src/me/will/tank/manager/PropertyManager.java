@@ -1,4 +1,4 @@
-package me.will.tank;
+package me.will.tank.manager;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -27,7 +27,7 @@ public class PropertyManager {
         return PROPERTY.get(key);
     }
 
-    static int getAsInt(String key, int defInt) {
+    public static int getAsInt(String key, int defInt) {
         String value = (String) get(key);
         if (null == value || value.isEmpty()) {
             return defInt;

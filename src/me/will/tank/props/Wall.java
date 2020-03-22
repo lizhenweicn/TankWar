@@ -1,4 +1,6 @@
-package me.will.tank;
+package me.will.tank.props;
+
+import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,9 +9,9 @@ import java.awt.Rectangle;
 /**
  * @author : zhenweiLi
  * @date :2020-03-22 09:55
- * DESC : 游戏里的墙
+ * DESC : 墙
  */
-public class Wall extends BaseGameObject {
+public class Wall extends BaseGameProps {
 
     /**
      * 墙的 X 轴位置

@@ -1,6 +1,6 @@
 package test;
 
-import me.will.tank.ResManager;
+import me.will.tank.manager.ResManager;
 import org.junit.Test;
 
 import java.awt.Graphics2D;

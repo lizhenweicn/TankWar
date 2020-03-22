@@ -1,4 +1,8 @@
-package me.will.tank;
+package me.will.tank.main;
+
+import me.will.tank.enums.Dir;
+import me.will.tank.manager.PropertyManager;
+import me.will.tank.props.Tank;
 
 import java.awt.Color;
 import java.awt.Frame;

@@ -1,4 +1,4 @@
-package me.will.tank;
+package me.will.tank.utils;
 
 import java.io.IOException;
 

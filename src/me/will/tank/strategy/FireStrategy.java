@@ -1,4 +1,6 @@
-package me.will.tank;
+package me.will.tank.strategy;
+
+import me.will.tank.props.Tank;
 
 /**
  * @author : zhenweiLi
@@ -7,6 +9,9 @@ package me.will.tank;
  */
 public interface FireStrategy {
 
+    /**
+     * 具体的开火方式
+     */
     void fire(Tank tank);
 
 }

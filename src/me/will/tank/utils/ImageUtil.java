@@ -1,4 +1,4 @@
-package me.will.tank;
+package me.will.tank.utils;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

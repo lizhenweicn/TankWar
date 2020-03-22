@@ -1,4 +1,9 @@
-package me.will.tank;
+package me.will.tank.props;
+
+import me.will.tank.utils.Audio;
+import me.will.tank.main.GameModel;
+import me.will.tank.manager.ResManager;
+import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Graphics;
 
@@ -7,7 +12,7 @@ import java.awt.Graphics;
  * @date :2019-05-11 20:10
  * DESC : 爆炸类
  */
-public class Explode extends BaseGameObject {
+public class Explode extends BaseGameProps {
 
     /**
      * 爆炸的宽度

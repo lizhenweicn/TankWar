@@ -1,4 +1,12 @@
-package me.will.tank;
+package me.will.tank.props;
+
+import me.will.tank.enums.Dir;
+import me.will.tank.main.GameModel;
+import me.will.tank.enums.Group;
+import me.will.tank.manager.PropertyManager;
+import me.will.tank.manager.ResManager;
+import me.will.tank.main.TankFrame;
+import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -8,7 +16,7 @@ import java.awt.Rectangle;
  * @date :2019-04-28 20:52
  * DESC : 子弹类
  */
-public class Bullet extends BaseGameObject {
+public class Bullet extends BaseGameProps {
 
     /**
      * 子弹的宽度

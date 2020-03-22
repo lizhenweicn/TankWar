@@ -1,4 +1,7 @@
-package me.will.tank;
+package me.will.tank.resiposibility;
+
+import me.will.tank.decorator.BaseGameProps;
+import me.will.tank.props.Tank;
 
 /**
  * @author : zhenweiLi
@@ -7,7 +10,7 @@ package me.will.tank;
  */
 public class TankTankCollider implements Collider {
     @Override
-    public void collide(BaseGameObject o1, BaseGameObject o2) {
+    public void collide(BaseGameProps o1, BaseGameProps o2) {
         if (o1 instanceof Tank && o2 instanceof Tank) {
             collideWith((Tank) o1, (Tank) o2);
         }

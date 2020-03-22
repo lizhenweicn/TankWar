@@ -1,9 +1,9 @@
-package me.will.tank;
+package me.will.tank.main;
 
 /**
  * @author : zhenweiLi
  * @date :2019-04-21 09:30
- * DESC : new 出一个窗口
+ * DESC : 坦克大战主入口
  */
 public class Main {
     public static void main(String[] args) throws InterruptedException {

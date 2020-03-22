@@ -1,4 +1,4 @@
-package me.will.tank;
+package me.will.tank.decorator;
 
 import java.awt.Graphics;
 
@@ -7,7 +7,7 @@ import java.awt.Graphics;
  * @date :2020-03-22 07:13
  * DESC : 游戏道具的父类
  */
-public abstract class BaseGameObject {
+public abstract class BaseGameProps {
 
 
 

@@ -1,4 +1,6 @@
-package me.will.tank;
+package me.will.tank.manager;
+
+import me.will.tank.utils.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

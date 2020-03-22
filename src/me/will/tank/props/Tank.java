@@ -1,4 +1,14 @@
-package me.will.tank;
+package me.will.tank.props;
+
+import me.will.tank.enums.Dir;
+import me.will.tank.strategy.FireStrategy;
+import me.will.tank.main.GameModel;
+import me.will.tank.enums.Group;
+import me.will.tank.manager.PropertyManager;
+import me.will.tank.manager.ResManager;
+import me.will.tank.strategy.SafeFireStrategy;
+import me.will.tank.main.TankFrame;
+import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -9,7 +19,7 @@ import java.util.Random;
  * @date :2019-04-28 20:23
  * DESC : 坦克类
  */
-public class Tank extends BaseGameObject {
+public class Tank extends BaseGameProps {
 
     /**
      * 坦克的宽度
@@ -326,7 +336,10 @@ public class Tank extends BaseGameObject {
      * 发射子弹
      */
     public void fire() {
-        fireStrategy.fire(this);
+        //  活着才能开火
+        if (this.isLiving()) {
+            fireStrategy.fire(this);
+        }
     }
 
     public void back() {

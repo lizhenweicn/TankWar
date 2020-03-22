@@ -1,17 +1,30 @@
-package me.will.tank;
+package me.will.tank.main;
+
+import me.will.tank.enums.Dir;
+import me.will.tank.enums.Group;
+import me.will.tank.manager.PropertyManager;
+import me.will.tank.decorator.BaseGameProps;
+import me.will.tank.props.Bullet;
+import me.will.tank.props.Tank;
+import me.will.tank.props.Wall;
+import me.will.tank.resiposibility.BulletTankCollider;
+import me.will.tank.resiposibility.BulletWallCollider;
+import me.will.tank.resiposibility.ColliderChain;
+import me.will.tank.resiposibility.TankTankCollider;
+import me.will.tank.resiposibility.TankWallCollider;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import static me.will.tank.TankFrame.GAME_HEIGHT;
-import static me.will.tank.TankFrame.GAME_WIDTH;
+import static me.will.tank.main.TankFrame.GAME_HEIGHT;
+import static me.will.tank.main.TankFrame.GAME_WIDTH;
 
 /**
  * @author : zhenweiLi
  * @date :2020-03-21 23:06
- * DESC : 游戏物品模型
+ * DESC : 坦克大战主数据
  */
 public class GameModel {
 
@@ -33,7 +46,7 @@ public class GameModel {
     /**
      * 游戏物体容器
      */
-    private List<BaseGameObject> mGameObjectList = new ArrayList<>();
+    private List<BaseGameProps> mGameObjectList = new ArrayList<>();
 
     /**
      * 游戏物体碰撞检测链
@@ -70,11 +83,11 @@ public class GameModel {
         add(new Wall(550, 300, 50, 200));
     }
 
-    public void add(BaseGameObject gameObject) {
+    public void add(BaseGameProps gameObject) {
         mGameObjectList.add(gameObject);
     }
 
-    public void remove(BaseGameObject gameObject) {
+    public void remove(BaseGameProps gameObject) {
         mGameObjectList.remove(gameObject);
     }
 
@@ -90,8 +103,8 @@ public class GameModel {
         //  碰撞检测
         for (int i = 0; i < mGameObjectList.size(); i++) {
             for (int j = 0; j < mGameObjectList.size(); j++) {
-                BaseGameObject o1 = mGameObjectList.get(i);
-                BaseGameObject o2 = mGameObjectList.get(j);
+                BaseGameProps o1 = mGameObjectList.get(i);
+                BaseGameProps o2 = mGameObjectList.get(j);
                 mColliderChain.collide(o1, o2);
             }
         }
