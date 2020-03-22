@@ -204,6 +204,11 @@ public class Bullet extends BaseGameObject {
             return;
         }
 
+        //  子弹死亡则无需检测
+        if (!this.mIsLiving) {
+            return;
+        }
+
         //  碰撞检测
         if (this.getRectangle().intersects(tank.getRectangle())) {
             this.die();

@@ -313,11 +313,20 @@ public class Tank extends BaseGameObject {
      * @param tank 坦克实例
      */
     public void collideWith(Tank tank) {
-        //  碰撞检测
+
+        //  坦克死亡则无需检测
+        if (!this.mIsLiving) {
+            return;
+        }
+
+        //  碰撞检测 : 两个坦克相撞分别回到屏幕左右两侧的还原点。
+        //  注意 - 自己撞自己是没有任何意义的。
         if (this.getRectangle().intersects(tank.getRectangle())) {
             if (this != tank) {
-                this.moving = false;
-                tank.moving = false;
+                this.mTankX = 0;
+                this.mTankY = TankFrame.GAME_HEIGHT >> 1;
+                tank.mTankX = TankFrame.GAME_WIDTH;
+                tank.mTankY = TankFrame.GAME_HEIGHT >> 1;
             }
         }
     }
