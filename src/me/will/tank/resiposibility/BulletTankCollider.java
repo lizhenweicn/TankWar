@@ -1,6 +1,7 @@
 package me.will.tank.resiposibility;
 
-import me.will.tank.decorator.BaseGameProps;
+import me.will.tank.manager.ResManager;
+import me.will.tank.props.BaseGameProps;
 import me.will.tank.props.Bullet;
 import me.will.tank.props.Explode;
 import me.will.tank.props.Tank;
@@ -36,11 +37,13 @@ public class BulletTankCollider implements Collider {
 
         //  碰撞检测
         if (bullet.getRectangle().intersects(tank.getRectangle())) {
+            System.out.println("bullet : " + bullet.getRectangle());
+            System.out.println("tank : " + tank.getRectangle().toString());
             bullet.die();
             tank.die();
             //  显示爆炸效果
-            int explodeX = tank.getTankX() + tank.getTankWidth() / 2 - Explode.EXPLODE_WIDTH / 2;
-            int explodeY = tank.getTankY() + tank.getTankHeight() / 2 - Explode.EXPLODE_HEIGHT / 2;
+            int explodeX = tank.getRectangle().x + ResManager.getTankWidth() / 2 - Explode.EXPLODE_WIDTH / 2;
+            int explodeY = tank.getRectangle().y + ResManager.getTankHeight() / 2 - Explode.EXPLODE_HEIGHT / 2;
             new Explode(explodeX, explodeY);
         }
     }

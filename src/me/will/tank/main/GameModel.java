@@ -3,8 +3,8 @@ package me.will.tank.main;
 import me.will.tank.enums.Dir;
 import me.will.tank.enums.Group;
 import me.will.tank.manager.PropertyManager;
-import me.will.tank.decorator.BaseGameProps;
-import me.will.tank.props.Bullet;
+import me.will.tank.props.BaseGameProps;
+import me.will.tank.manager.ResManager;
 import me.will.tank.props.Tank;
 import me.will.tank.props.Wall;
 import me.will.tank.resiposibility.BulletTankCollider;
@@ -66,21 +66,21 @@ public class GameModel {
         ;
         //  主战坦克
         mMainTank = new Tank(
-                (GAME_WIDTH - Tank.TANK_WIDTH) / 2,
-                GAME_HEIGHT - Tank.TANK_HEIGHT - Bullet.BULLET_HEIGHT,
+                (GAME_WIDTH - ResManager.getTankWidth()) / 2,
+                GAME_HEIGHT - ResManager.getTankHeight() - ResManager.getBulletHeight(),
                 Dir.U, Group.GOOD
         );
         //  初始化敌方坦克
         int tankListSize = PropertyManager.getAsInt("INIT_TANK_COUNT", 5);
-        int offset = (TankFrame.GAME_WIDTH - tankListSize * Tank.TANK_WIDTH) / (tankListSize + 1);
+        int offset = (TankFrame.GAME_WIDTH - tankListSize * ResManager.getTankWidth()) / (tankListSize + 1);
         for (int i = 0; i < tankListSize; i++) {
-            new Tank((Tank.TANK_WIDTH + offset) * i + offset, offset, Dir.D, Group.BAD);
+            new Tank((ResManager.getTankWidth() + offset) * i + offset, offset, Dir.D, Group.BAD);
         }
         //  初始化墙
-        add(new Wall(150, 150, 200, 50));
-        add(new Wall(550, 150, 200, 50));
-        add(new Wall(300, 300, 50, 200));
-        add(new Wall(550, 300, 50, 200));
+        new Wall(150, 150, 200, 50);
+        new Wall(550, 150, 200, 50);
+        new Wall(300, 300, 50, 200);
+        new Wall(550, 300, 50, 200);
     }
 
     public void add(BaseGameProps gameObject) {

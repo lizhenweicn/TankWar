@@ -1,10 +1,9 @@
 package me.will.tank.props;
 
-import me.will.tank.decorator.BaseGameProps;
+import me.will.tank.main.GameModel;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 /**
  * @author : zhenweiLi
@@ -13,48 +12,19 @@ import java.awt.Rectangle;
  */
 public class Wall extends BaseGameProps {
 
-    /**
-     * 墙的 X 轴位置
-     */
-    private int mWallX;
-
-    /**
-     * 墙的 Y 轴位置
-     */
-    private int mWallY;
-
-    /**
-     * 墙的宽度
-     */
-    private int mWallW;
-
-    /**
-     * 墙的高度
-     */
-    private int mWallH;
-
-    /**
-     * 矩形区域
-     */
-    private Rectangle mRectangle;
-
-    public Rectangle getRectangle() {
-        return mRectangle;
-    }
-
-    public Wall(int mWallX, int mWallY, int mWallW, int mWallH) {
-        this.mWallX = mWallX;
-        this.mWallY = mWallY;
-        this.mWallW = mWallW;
-        this.mWallH = mWallH;
-        this.mRectangle = new Rectangle(mWallX, mWallY, mWallW, mWallH);
+    public Wall(int wallX, int wallY, int wallW, int wallH) {
+        this.mRectangle.x = wallX;
+        this.mRectangle.y = wallY;
+        this.mRectangle.width = wallW;
+        this.mRectangle.height = wallH;
+        GameModel.getInstance().add(this);
     }
 
     @Override
     public void paint(Graphics g) {
         Color color = g.getColor();
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(mWallX, mWallY, mWallW, mWallH);
+        g.fillRect(mRectangle.x, mRectangle.y, mRectangle.width, mRectangle.height);
         g.setColor(color);
     }
 

@@ -1,5 +1,6 @@
 package me.will.tank.props;
 
+import me.will.tank.decorator.RectBorderDecorator;
 import me.will.tank.enums.Dir;
 import me.will.tank.strategy.FireStrategy;
 import me.will.tank.main.GameModel;
@@ -8,10 +9,8 @@ import me.will.tank.manager.PropertyManager;
 import me.will.tank.manager.ResManager;
 import me.will.tank.strategy.SafeFireStrategy;
 import me.will.tank.main.TankFrame;
-import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.util.Random;
 
 /**
@@ -22,29 +21,9 @@ import java.util.Random;
 public class Tank extends BaseGameProps {
 
     /**
-     * 坦克的宽度
-     */
-    public static final int TANK_WIDTH = ResManager.mGoodTankD.getWidth();
-
-    /**
-     * 坦克的高度
-     */
-    public static final int TANK_HEIGHT = ResManager.mGoodTankD.getHeight();
-
-    /**
      * 坦克移动速度( 正向 )
      */
     private static final int TANK_SPEED = PropertyManager.getAsInt("TASK_SPEED", 2);
-
-    /**
-     * 坦克的 X 轴位置
-     */
-    private int mTankX;
-
-    /**
-     * 坦克的 Y 轴位置
-     */
-    private int mTankY;
 
     /**
      * 坦克的原 X 轴位置
@@ -118,57 +97,12 @@ public class Tank extends BaseGameProps {
     }
 
     /**
-     * 矩形范围
-     */
-    private Rectangle mRectangle = new Rectangle();
-
-    /**
      * 坦克的开火策略（ 默认策略 ）
      */
     private FireStrategy fireStrategy = new SafeFireStrategy();
 
-    public int getTankX() {
-        return mTankX;
-    }
-
-    public int getTankY() {
-        return mTankY;
-    }
-
-    public int getTankOldX() {
-        return mTankOldX;
-    }
-
-    public void setTankOldX(int mTankOldX) {
-        this.mTankOldX = mTankOldX;
-    }
-
-    public int getmTankOldY() {
-        return mTankOldY;
-    }
-
-    public void setmTankOldY(int mTankOldY) {
-        this.mTankOldY = mTankOldY;
-    }
-
-    public int getTankWidth() {
-        return TANK_WIDTH;
-    }
-
-    public int getTankHeight() {
-        return TANK_HEIGHT;
-    }
-
     public Group getGroup() {
         return mGroup;
-    }
-
-    public void setGroup(Group mGroup) {
-        this.mGroup = mGroup;
-    }
-
-    public Rectangle getRectangle() {
-        return mRectangle;
     }
 
     public boolean isLiving() {
@@ -189,16 +123,14 @@ public class Tank extends BaseGameProps {
      * @param dir   初始化的方向
      */
     public Tank(int tankX, int tankY, Dir dir, Group group) {
-        this.mTankX = tankX;
-        this.mTankY = tankY;
+        this.mRectangle.x = tankX;
+        this.mRectangle.y = tankY;
+        this.mRectangle.width = ResManager.getTankWidth();
+        this.mRectangle.height = ResManager.getTankHeight();
         this.mTankDir = dir;
         this.mGroup = group;
         this.moving = (group == Group.BAD);
-        this.mRectangle.x = tankX;
-        this.mRectangle.y = tankY;
-        this.mRectangle.width = TANK_WIDTH;
-        this.mRectangle.height = TANK_HEIGHT;
-        GameModel.getInstance().add(this);
+        GameModel.getInstance().add(new RectBorderDecorator(this));
     }
 
     /**
@@ -215,28 +147,28 @@ public class Tank extends BaseGameProps {
 
         switch (mTankDir) {
             case U:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankU : ResManager.mBadTankU, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankU : ResManager.mBadTankU, mRectangle.x, mRectangle.y, null);
                 break;
             case D:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankD : ResManager.mBadTankD, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankD : ResManager.mBadTankD, mRectangle.x, mRectangle.y, null);
                 break;
             case L:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankL : ResManager.mBadTankL, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankL : ResManager.mBadTankL, mRectangle.x, mRectangle.y, null);
                 break;
             case R:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankR : ResManager.mBadTankR, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankR : ResManager.mBadTankR, mRectangle.x, mRectangle.y, null);
                 break;
             case LU:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankLU : ResManager.mBadTankLU, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankLU : ResManager.mBadTankLU, mRectangle.x, mRectangle.y, null);
                 break;
             case LD:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankLD : ResManager.mBadTankLD, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankLD : ResManager.mBadTankLD, mRectangle.x, mRectangle.y, null);
                 break;
             case RU:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankRU : ResManager.mBadTankRU, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankRU : ResManager.mBadTankRU, mRectangle.x, mRectangle.y, null);
                 break;
             case RD:
-                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankRD : ResManager.mBadTankRD, mTankX, mTankY, null);
+                g.drawImage(this.mGroup == Group.GOOD ? ResManager.mGoodTankRD : ResManager.mBadTankRD, mRectangle.x, mRectangle.y, null);
                 break;
             default:
                 break;
@@ -250,8 +182,8 @@ public class Tank extends BaseGameProps {
     private void move() {
 
         //  记录上一次的位置
-        mTankOldX = mTankX;
-        mTankOldY = mTankY;
+        mTankOldX = mRectangle.x;
+        mTankOldY = mRectangle.y;
 
         if (!isMoving()) {
             return;
@@ -259,32 +191,32 @@ public class Tank extends BaseGameProps {
 
         switch (mTankDir) {
             case U:
-                mTankY -= TANK_SPEED;
+                mRectangle.y -= TANK_SPEED;
                 break;
             case D:
-                mTankY += TANK_SPEED;
+                mRectangle.y += TANK_SPEED;
                 break;
             case L:
-                mTankX -= TANK_SPEED;
+                mRectangle.x -= TANK_SPEED;
                 break;
             case R:
-                mTankX += TANK_SPEED;
+                mRectangle.x += TANK_SPEED;
                 break;
             case LU:
-                mTankX -= TANK_SPEED - 1;
-                mTankY -= TANK_SPEED - 1;
+                mRectangle.x -= TANK_SPEED - 1;
+                mRectangle.y -= TANK_SPEED - 1;
                 break;
             case LD:
-                mTankX -= TANK_SPEED - 1;
-                mTankY += TANK_SPEED - 1;
+                mRectangle.x -= TANK_SPEED - 1;
+                mRectangle.y += TANK_SPEED - 1;
                 break;
             case RU:
-                mTankX += TANK_SPEED - 1;
-                mTankY -= TANK_SPEED - 1;
+                mRectangle.x += TANK_SPEED - 1;
+                mRectangle.y -= TANK_SPEED - 1;
                 break;
             case RD:
-                mTankX += TANK_SPEED - 1;
-                mTankY += TANK_SPEED - 1;
+                mRectangle.x += TANK_SPEED - 1;
+                mRectangle.y += TANK_SPEED - 1;
                 break;
             default:
                 break;
@@ -303,10 +235,6 @@ public class Tank extends BaseGameProps {
         //  边界检测
         boundCheck();
 
-        //  更新矩形坐标
-        this.mRectangle.x = this.mTankX;
-        this.mRectangle.y = this.mTankY;
-
     }
 
     /**
@@ -314,20 +242,20 @@ public class Tank extends BaseGameProps {
      */
     private void boundCheck() {
 
-        if (this.mTankX < 0) {
-            this.mTankX = 0;
+        if (this.mRectangle.x < 0) {
+            this.mRectangle.x = 0;
         }
 
-        if (this.mTankY < 20) {
-            this.mTankY = 20;
+        if (this.mRectangle.y < 20) {
+            this.mRectangle.y = 20;
         }
 
-        if (this.mTankX > TankFrame.GAME_WIDTH - Tank.TANK_WIDTH) {
-            this.mTankX = TankFrame.GAME_WIDTH - Tank.TANK_WIDTH;
+        if (this.mRectangle.x > TankFrame.GAME_WIDTH - ResManager.getTankWidth()) {
+            this.mRectangle.x = TankFrame.GAME_WIDTH - ResManager.getTankWidth();
         }
 
-        if (this.mTankY > TankFrame.GAME_HEIGHT - Tank.TANK_HEIGHT) {
-            this.mTankY = TankFrame.GAME_HEIGHT - Tank.TANK_HEIGHT;
+        if (this.mRectangle.y > TankFrame.GAME_HEIGHT - ResManager.getTankHeight()) {
+            this.mRectangle.y = TankFrame.GAME_HEIGHT - ResManager.getTankHeight();
         }
 
     }
@@ -343,8 +271,8 @@ public class Tank extends BaseGameProps {
     }
 
     public void back() {
-        mTankX = mTankOldX;
-        mTankY = mTankOldY;
+        this.mRectangle.x = mTankOldX;
+        this.mRectangle.y = mTankOldY;
     }
 
     /**

@@ -1,15 +1,14 @@
 package me.will.tank.props;
 
+import me.will.tank.decorator.RectBorderDecorator;
 import me.will.tank.enums.Dir;
 import me.will.tank.main.GameModel;
 import me.will.tank.enums.Group;
 import me.will.tank.manager.PropertyManager;
 import me.will.tank.manager.ResManager;
 import me.will.tank.main.TankFrame;
-import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 /**
  * @author : zhenweiLi
@@ -19,29 +18,9 @@ import java.awt.Rectangle;
 public class Bullet extends BaseGameProps {
 
     /**
-     * 子弹的宽度
-     */
-    public static final int BULLET_WIDTH = ResManager.mBulletD.getWidth();
-
-    /**
-     * 子弹的高度
-     */
-    public static final int BULLET_HEIGHT = ResManager.mBulletD.getHeight();
-
-    /**
      * 子弹移动速度( 正向 )
      */
     private static final int BULLET_SPEED = PropertyManager.getAsInt("BULLET_SPEED", 6);
-
-    /**
-     * 子弹的 X 轴位置
-     */
-    private int mBulletX;
-
-    /**
-     * 子弹的 Y 轴位置
-     */
-    private int mBulletY;
 
     /**
      * 子弹方向
@@ -58,21 +37,8 @@ public class Bullet extends BaseGameProps {
      */
     private Group mGroup;
 
-    /**
-     * 矩形范围
-     */
-    private Rectangle mRectangle = new Rectangle();
-
     public Group getGroup() {
         return mGroup;
-    }
-
-    public void setGroup(Group mGroup) {
-        this.mGroup = mGroup;
-    }
-
-    public Rectangle getRectangle() {
-        return mRectangle;
     }
 
     public boolean isLiving() {
@@ -93,17 +59,13 @@ public class Bullet extends BaseGameProps {
      * @param bulletDir 初始化的方向
      */
     public Bullet(int bulletX, int bulletY, Dir bulletDir, Group group) {
-        this.mBulletX = bulletX;
-        this.mBulletY = bulletY;
-        this.mBulletDir = bulletDir;
-        this.mGroup = group;
-
         this.mRectangle.x = bulletX;
         this.mRectangle.y = bulletY;
-        this.mRectangle.width = BULLET_WIDTH;
-        this.mRectangle.height = BULLET_HEIGHT;
-
-        GameModel.getInstance().add(this);
+        this.mRectangle.width = ResManager.getBulletWidth();
+        this.mRectangle.height = ResManager.getBulletHeight();
+        this.mBulletDir = bulletDir;
+        this.mGroup = group;
+        GameModel.getInstance().add(new RectBorderDecorator(this));
     }
 
     /**
@@ -120,28 +82,28 @@ public class Bullet extends BaseGameProps {
 
         switch (mBulletDir) {
             case U:
-                g.drawImage(ResManager.mBulletU, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletU, mRectangle.x, mRectangle.y, null);
                 break;
             case D:
-                g.drawImage(ResManager.mBulletD, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletD, mRectangle.x, mRectangle.y, null);
                 break;
             case L:
-                g.drawImage(ResManager.mBulletL, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletL, mRectangle.x, mRectangle.y, null);
                 break;
             case R:
-                g.drawImage(ResManager.mBulletR, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletR, mRectangle.x, mRectangle.y, null);
                 break;
             case LU:
-                g.drawImage(ResManager.mBulletLU, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletLU, mRectangle.x, mRectangle.y, null);
                 break;
             case LD:
-                g.drawImage(ResManager.mBulletLD, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletLD, mRectangle.x, mRectangle.y, null);
                 break;
             case RU:
-                g.drawImage(ResManager.mBulletRU, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletRU, mRectangle.x, mRectangle.y, null);
                 break;
             case RD:
-                g.drawImage(ResManager.mBulletRD, mBulletX, mBulletY, null);
+                g.drawImage(ResManager.mBulletRD, mRectangle.x, mRectangle.y, null);
                 break;
             default:
                 break;
@@ -157,42 +119,38 @@ public class Bullet extends BaseGameProps {
 
         switch (mBulletDir) {
             case L:
-                mBulletX -= BULLET_SPEED;
+                mRectangle.x -= BULLET_SPEED;
                 break;
             case U:
-                mBulletY -= BULLET_SPEED;
+                mRectangle.y -= BULLET_SPEED;
                 break;
             case R:
-                mBulletX += BULLET_SPEED;
+                mRectangle.x += BULLET_SPEED;
                 break;
             case D:
-                mBulletY += BULLET_SPEED;
+                mRectangle.y += BULLET_SPEED;
                 break;
             case LU:
-                mBulletX -= BULLET_SPEED - 2;
-                mBulletY -= BULLET_SPEED - 2;
+                mRectangle.x -= BULLET_SPEED - 2;
+                mRectangle.y -= BULLET_SPEED - 2;
                 break;
             case LD:
-                mBulletX -= BULLET_SPEED - 2;
-                mBulletY += BULLET_SPEED - 2;
+                mRectangle.x -= BULLET_SPEED - 2;
+                mRectangle.y += BULLET_SPEED - 2;
                 break;
             case RU:
-                mBulletX += BULLET_SPEED - 2;
-                mBulletY -= BULLET_SPEED - 2;
+                mRectangle.x += BULLET_SPEED - 2;
+                mRectangle.y -= BULLET_SPEED - 2;
                 break;
             case RD:
-                mBulletX += BULLET_SPEED - 2;
-                mBulletY += BULLET_SPEED - 2;
+                mRectangle.x += BULLET_SPEED - 2;
+                mRectangle.y += BULLET_SPEED - 2;
                 break;
             default:
                 break;
         }
 
-        //  更新矩形坐标
-        this.mRectangle.x = this.mBulletX;
-        this.mRectangle.y = this.mBulletY;
-
-        if (mBulletX < 0 || mBulletY < 0 || mBulletX > TankFrame.GAME_WIDTH || mBulletY > TankFrame.GAME_HEIGHT) {
+        if (mRectangle.x < 0 || mRectangle.y < 0 || mRectangle.x > TankFrame.GAME_WIDTH || mRectangle.y > TankFrame.GAME_HEIGHT) {
             mIsLiving = false;
         }
 

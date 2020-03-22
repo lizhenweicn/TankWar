@@ -3,7 +3,6 @@ package me.will.tank.props;
 import me.will.tank.utils.Audio;
 import me.will.tank.main.GameModel;
 import me.will.tank.manager.ResManager;
-import me.will.tank.decorator.BaseGameProps;
 
 import java.awt.Graphics;
 

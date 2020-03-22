@@ -1,5 +1,7 @@
 package me.will.tank.decorator;
 
+import me.will.tank.props.BaseGameProps;
+
 import java.awt.Graphics;
 
 /**
@@ -12,11 +14,16 @@ public class GamePropsDecorator extends BaseGameProps {
     /**
      * 真正的游戏道具
      */
-    private BaseGameProps gameObject;
+    private BaseGameProps mGameProps;
 
+    public GamePropsDecorator(BaseGameProps gameProps) {
+        this.mGameProps = gameProps;
+    }
 
     @Override
     public void paint(Graphics g) {
-
+        if (mGameProps != null) {
+            mGameProps.paint(g);
+        }
     }
 }

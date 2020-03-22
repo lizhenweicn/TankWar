@@ -81,4 +81,32 @@ public class ResManager {
         }
     }
 
+    /**
+     * 获取坦克图片的宽度
+     */
+    public static int getTankWidth() {
+        return mGoodTankD == null ? 0 : mGoodTankD.getWidth();
+    }
+
+    /**
+     * 获取坦克图片的高度
+     */
+    public static int getTankHeight() {
+        return mGoodTankD == null ? 0 : mGoodTankD.getHeight();
+    }
+
+    /**
+     * 获取子弹图片的宽度
+     */
+    public static int getBulletWidth() {
+        return mBulletD == null ? 0 : mBulletD.getWidth();
+    }
+
+    /**
+     * 获取子弹图片的高度
+     */
+    public static int getBulletHeight() {
+        return mBulletD == null ? 0 : mBulletD.getHeight();
+    }
+
 }

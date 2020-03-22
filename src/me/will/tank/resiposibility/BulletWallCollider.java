@@ -1,6 +1,6 @@
 package me.will.tank.resiposibility;
 
-import me.will.tank.decorator.BaseGameProps;
+import me.will.tank.props.BaseGameProps;
 import me.will.tank.props.Bullet;
 import me.will.tank.props.Wall;
 

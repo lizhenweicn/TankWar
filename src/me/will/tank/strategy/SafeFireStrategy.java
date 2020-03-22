@@ -1,13 +1,11 @@
 package me.will.tank.strategy;
 
+import me.will.tank.manager.ResManager;
 import me.will.tank.utils.Audio;
 import me.will.tank.enums.Dir;
 import me.will.tank.enums.Group;
 import me.will.tank.props.Bullet;
 import me.will.tank.props.Tank;
-
-import static me.will.tank.props.Tank.TANK_HEIGHT;
-import static me.will.tank.props.Tank.TANK_WIDTH;
 
 /**
  * @author : zhenweiLi
@@ -17,14 +15,18 @@ import static me.will.tank.props.Tank.TANK_WIDTH;
 public class SafeFireStrategy implements FireStrategy {
     @Override
     public void fire(Tank tank) {
-        int tankX = tank.getTankX();
-        int tankY = tank.getTankY();
+        int tankX = tank.getRectangle().x;
+        int tankY = tank.getRectangle().y;
         Group group = tank.getGroup();
+        int tankWidth = ResManager.getTankWidth();
+        int tankHeight = ResManager.getTankHeight();
+        int bulletWidth = ResManager.getBulletWidth();
+        int bulletHeight = ResManager.getBulletHeight();
         if (group == Group.GOOD) {
-            new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY - Bullet.BULLET_HEIGHT, Dir.U, group);
-            new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY + TANK_HEIGHT, Dir.D, group);
-            new Bullet(tankX - Bullet.BULLET_WIDTH, tankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), Dir.L, group);
-            new Bullet(tankX + TANK_WIDTH, tankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), Dir.R, group);
+            new Bullet(tankX + (tankWidth >> 1) - (bulletWidth >> 1), tankY - bulletHeight, Dir.U, group);
+            new Bullet(tankX + (tankWidth >> 1) - (bulletWidth >> 1), tankY + tankHeight, Dir.D, group);
+            new Bullet(tankX - bulletWidth, tankY + (tankHeight >> 1) - (bulletHeight >> 1), Dir.L, group);
+            new Bullet(tankX + tankWidth, tankY + (tankHeight >> 1) - (bulletHeight >> 1), Dir.R, group);
         } else {
             DefaultFireStrategy.getInstance().fire(tank);
         }

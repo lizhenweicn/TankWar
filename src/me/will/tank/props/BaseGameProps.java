@@ -1,6 +1,7 @@
-package me.will.tank.decorator;
+package me.will.tank.props;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * @author : zhenweiLi
@@ -9,7 +10,16 @@ import java.awt.Graphics;
  */
 public abstract class BaseGameProps {
 
+    /**
+     * 矩形范围
+     * <p>
+     * 每个子类都应有具有矩形区域
+     */
+    protected Rectangle mRectangle = new Rectangle();
 
+    public Rectangle getRectangle() {
+        return mRectangle;
+    }
 
     /**
      * 游戏道具绘制自己的方法
@@ -17,5 +27,6 @@ public abstract class BaseGameProps {
      * @param g 画笔
      */
     public abstract void paint(Graphics g);
+
 
 }
