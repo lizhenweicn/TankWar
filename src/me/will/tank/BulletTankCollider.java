@@ -36,7 +36,7 @@ public class BulletTankCollider implements Collider {
             //  显示爆炸效果
             int explodeX = tank.getTankX() + tank.getTankWidth() / 2 - Explode.EXPLODE_WIDTH / 2;
             int explodeY = tank.getTankY() + tank.getTankHeight() / 2 - Explode.EXPLODE_HEIGHT / 2;
-            new Explode(explodeX, explodeY, tank.getGameModel());
+            new Explode(explodeX, explodeY);
         }
     }
 

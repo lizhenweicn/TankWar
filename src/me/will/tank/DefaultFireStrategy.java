@@ -27,31 +27,30 @@ public class DefaultFireStrategy implements FireStrategy {
         int tankY = tank.getTankY();
         Dir tankDir = tank.getTankDir();
         Group group = tank.getGroup();
-        GameModel tankFrame = tank.getGameModel();
         switch (tankDir) {
             case U:
-                new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY - Bullet.BULLET_HEIGHT, tankDir, group, tankFrame);
+                new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY - Bullet.BULLET_HEIGHT, tankDir, group);
                 break;
             case D:
-                new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY + TANK_HEIGHT, tankDir, group, tankFrame);
+                new Bullet(tankX + (TANK_WIDTH >> 1) - (Bullet.BULLET_WIDTH >> 1), tankY + TANK_HEIGHT, tankDir, group);
                 break;
             case L:
-                new Bullet(tankX - Bullet.BULLET_WIDTH, tankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), tankDir, group, tankFrame);
+                new Bullet(tankX - Bullet.BULLET_WIDTH, tankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), tankDir, group);
                 break;
             case R:
-                new Bullet(tankX + TANK_WIDTH, tankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), tankDir, group, tankFrame);
+                new Bullet(tankX + TANK_WIDTH, tankY + (TANK_HEIGHT >> 1) - (Bullet.BULLET_HEIGHT >> 1), tankDir, group);
                 break;
             case LU:
-                new Bullet(tankX - Bullet.BULLET_WIDTH, tankY - Bullet.BULLET_WIDTH, tankDir, group, tankFrame);
+                new Bullet(tankX - Bullet.BULLET_WIDTH, tankY - Bullet.BULLET_WIDTH, tankDir, group);
                 break;
             case LD:
-                new Bullet(tankX - TANK_WIDTH + Bullet.BULLET_WIDTH, tankY + TANK_WIDTH, tankDir, group, tankFrame);
+                new Bullet(tankX - TANK_WIDTH + Bullet.BULLET_WIDTH, tankY + TANK_WIDTH, tankDir, group);
                 break;
             case RU:
-                new Bullet(tankX + TANK_WIDTH, tankY - (Bullet.BULLET_WIDTH >> 1), tankDir, group, tankFrame);
+                new Bullet(tankX + TANK_WIDTH, tankY - (Bullet.BULLET_WIDTH >> 1), tankDir, group);
                 break;
             case RD:
-                new Bullet(tankX + TANK_WIDTH, tankY + TANK_HEIGHT, tankDir, group, tankFrame);
+                new Bullet(tankX + TANK_WIDTH, tankY + TANK_HEIGHT, tankDir, group);
                 break;
             default:
                 break;

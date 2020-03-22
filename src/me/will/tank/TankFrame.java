@@ -27,11 +27,6 @@ public class TankFrame extends Frame {
     public static final int GAME_HEIGHT = PropertyManager.getAsInt("GAME_HEIGHT", 960);
 
     /**
-     * 游戏物品模型
-     */
-    private GameModel mGameModel = new GameModel();
-
-    /**
      * 坦克游戏的主窗口
      */
     public TankFrame() {
@@ -80,7 +75,7 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        mGameModel.paint(g);
+        GameModel.getInstance().paint(g);
     }
 
     /**
@@ -161,7 +156,7 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_CONTROL:
                 case KeyEvent.VK_SPACE:
                     //  control 键抬起时发射子弹
-                    Tank mMainTank = mGameModel.getMainTank();
+                    Tank mMainTank = GameModel.getInstance().getMainTank();
                     mMainTank.fire();
                     break;
                 default:
@@ -174,7 +169,7 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setMainTankDir() {
-            Tank mMainTank = mGameModel.getMainTank();
+            Tank mMainTank = GameModel.getInstance().getMainTank();
             if (!mBU && !mBD && !mBL && !mBR) {
                 mMainTank.setMoving(false);
             } else {

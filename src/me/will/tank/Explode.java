@@ -34,32 +34,28 @@ public class Explode extends BaseGameObject {
      */
     private int mStep;
 
-    /**
-     * 游戏窗口
-     */
-    private GameModel mGameModel;
-
     public Explode() {
     }
 
-    public Explode(int mExplodeX, int mExplodeY, GameModel gameModel) {
+    public Explode(int mExplodeX, int mExplodeY) {
         this.mExplodeX = mExplodeX;
         this.mExplodeY = mExplodeY;
-        this.mGameModel = gameModel;
-        this.mGameModel.add(this);
+        GameModel.getInstance().add(this);
+
         //  播放爆炸音效
         new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
 
     /**
      * 绘制爆炸
-     * @param g  画笔
+     *
+     * @param g 画笔
      */
     @Override
     public void paint(Graphics g) {
         g.drawImage(ResManager.explodes[mStep++], mExplodeX, mExplodeY, null);
         if (mStep >= ResManager.explodes.length) {
-            this.mGameModel.remove(this);
+            GameModel.getInstance().remove(this);
         }
     }
 

@@ -46,11 +46,6 @@ public class Bullet extends BaseGameObject {
     private boolean mIsLiving = true;
 
     /**
-     * 游戏道具模型
-     */
-    private GameModel mGameModel;
-
-    /**
      * 子弹的分组
      */
     private Group mGroup;
@@ -89,19 +84,18 @@ public class Bullet extends BaseGameObject {
      * @param bulletY   初始化 Y 轴
      * @param bulletDir 初始化的方向
      */
-    public Bullet(int bulletX, int bulletY, Dir bulletDir, Group group, GameModel gameModel) {
+    public Bullet(int bulletX, int bulletY, Dir bulletDir, Group group) {
         this.mBulletX = bulletX;
         this.mBulletY = bulletY;
         this.mBulletDir = bulletDir;
         this.mGroup = group;
-        this.mGameModel = gameModel;
 
         this.mRectangle.x = bulletX;
         this.mRectangle.y = bulletY;
         this.mRectangle.width = BULLET_WIDTH;
         this.mRectangle.height = BULLET_HEIGHT;
 
-        this.mGameModel.add(this);
+        GameModel.getInstance().add(this);
     }
 
     /**
@@ -113,7 +107,7 @@ public class Bullet extends BaseGameObject {
     public void paint(Graphics g) {
 
         if (!mIsLiving) {
-            mGameModel.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         switch (mBulletDir) {

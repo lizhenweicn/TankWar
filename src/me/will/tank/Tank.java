@@ -57,11 +57,6 @@ public class Tank extends BaseGameObject {
     private boolean moving;
 
     /**
-     * 游戏物品模型
-     */
-    private GameModel mGameModel;
-
-    /**
      * 获取坦克方向
      *
      * @return 方向枚举
@@ -166,10 +161,6 @@ public class Tank extends BaseGameObject {
         return mRectangle;
     }
 
-    public GameModel getGameModel() {
-        return mGameModel;
-    }
-
     public boolean isLiving() {
         return mIsLiving;
     }
@@ -187,20 +178,17 @@ public class Tank extends BaseGameObject {
      * @param tankY 初始化 Y 轴
      * @param dir   初始化的方向
      */
-    public Tank(int tankX, int tankY, Dir dir, Group group, GameModel gameModel) {
+    public Tank(int tankX, int tankY, Dir dir, Group group) {
         this.mTankX = tankX;
         this.mTankY = tankY;
         this.mTankDir = dir;
         this.mGroup = group;
-        this.mGameModel = gameModel;
         this.moving = (group == Group.BAD);
-//        this.moving = false;
-
         this.mRectangle.x = tankX;
         this.mRectangle.y = tankY;
         this.mRectangle.width = TANK_WIDTH;
         this.mRectangle.height = TANK_HEIGHT;
-        this.mGameModel.add(this);
+        GameModel.getInstance().add(this);
     }
 
     /**
@@ -212,7 +200,7 @@ public class Tank extends BaseGameObject {
     public void paint(Graphics g) {
 
         if (!mIsLiving) {
-            mGameModel.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         switch (mTankDir) {

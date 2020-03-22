@@ -15,6 +15,16 @@ import static me.will.tank.TankFrame.GAME_WIDTH;
  */
 public class GameModel {
 
+    private static final GameModel INSTANCE = new GameModel();
+
+    public static GameModel getInstance() {
+        return INSTANCE;
+    }
+
+    static {
+        INSTANCE.init();
+    }
+
     /**
      * 主战坦克
      */
@@ -30,7 +40,10 @@ public class GameModel {
      */
     private ColliderChain mColliderChain = new ColliderChain();
 
-    public GameModel() {
+    private GameModel() {
+    }
+
+    private void init() {
         //  初始化碰撞检测链
         mColliderChain
                 .add(new TankTankCollider())
@@ -42,13 +55,13 @@ public class GameModel {
         mMainTank = new Tank(
                 (GAME_WIDTH - Tank.TANK_WIDTH) / 2,
                 GAME_HEIGHT - Tank.TANK_HEIGHT - Bullet.BULLET_HEIGHT,
-                Dir.U, Group.GOOD, this
+                Dir.U, Group.GOOD
         );
         //  初始化敌方坦克
         int tankListSize = PropertyManager.getAsInt("INIT_TANK_COUNT", 5);
         int offset = (TankFrame.GAME_WIDTH - tankListSize * Tank.TANK_WIDTH) / (tankListSize + 1);
         for (int i = 0; i < tankListSize; i++) {
-            new Tank((Tank.TANK_WIDTH + offset) * i + offset, offset, Dir.D, Group.BAD, this);
+            new Tank((Tank.TANK_WIDTH + offset) * i + offset, offset, Dir.D, Group.BAD);
         }
         //  初始化墙
         add(new Wall(150, 150, 200, 50));
