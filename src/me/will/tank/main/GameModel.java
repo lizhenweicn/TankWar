@@ -1,7 +1,6 @@
 package me.will.tank.main;
 
 import me.will.tank.decorator.GamePropsDecorator;
-import me.will.tank.decorator.RectBorderDecorator;
 import me.will.tank.enums.Dir;
 import me.will.tank.enums.Group;
 import me.will.tank.manager.PropertyManager;
